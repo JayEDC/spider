@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.EsfToolsSpiderProxyIpMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.EsfToolsSpiderProxyIp">
+        <id column="ip_id" jdbcType="INTEGER" property="ipId" />
+        <result column="ip_addr" jdbcType="VARCHAR" property="ipAddr" />
+        <result column="ip_port" jdbcType="INTEGER" property="ipPort" />
+        <result column="successed_count" jdbcType="INTEGER" property="successedCount" />
+        <result column="failed_count" jdbcType="INTEGER" property="failedCount" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="success_time" jdbcType="TIMESTAMP" property="successTime" />
+        <result column="fail_time" jdbcType="TIMESTAMP" property="failTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ip_id AS ipId, ip_addr AS ipAddr, ip_port AS ipPort, successed_count AS successedCount, failed_count AS failedCount, create_time AS createTime, success_time AS successTime, fail_time AS failTime
+    </sql>
+    <select id="getFastProxyIpAll" resultMap="BaseResultMap">
+    select a.*, case a.successed_count+a.failed_count when 0 then 0 else round(a.successed_count/(a.successed_count+a.failed_count)*100) end  as rate from esf_tools_spider_proxy_ip a
+    where (a.successed_count=0 and a.failed_count=0) or (a.successed_count=0 and a.failed_count &lt;=50) or round(a.successed_count/(a.successed_count+a.failed_count)*100) &gt;=5
+    order by round(case a.successed_count+a.failed_count when  0 then 0 else (a.successed_count/(a.successed_count+a.failed_count))*100 end) desc
+  </select>
+
+    <delete id="delNotFastProxyIp">
+    delete from esf_tools_spider_proxy_ip  where ip_id not in(select * from (
+       select a.ip_id from esf_tools_spider_proxy_ip a
+    where (a.successed_count=0 and a.failed_count=0) or (a.successed_count=0 and a.failed_count &lt;=10) or round(a.successed_count/(a.successed_count+a.failed_count)*100) &gt;=50
+    order by round(case a.successed_count+a.failed_count when  0 then 0 else (a.successed_count/(a.successed_count+a.failed_count))*100 end) desc
+    ) t
+    )
+  </delete>
+</mapper>

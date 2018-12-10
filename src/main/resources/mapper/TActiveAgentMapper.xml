@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.TActiveAgentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.TActiveAgent">
+        <id column="id" property="id" />
+        <result column="agent_name" property="agentName" />
+        <result column="agent_phone" property="agentPhone" />
+        <result column="agent_location" property="agentLocation" />
+        <result column="create_time" property="createTime" />
+        <result column="active_date" property="activeDate" />
+        <result column="last_active_time" property="lastActiveTime" />
+        <result column="city_id" property="cityId" />
+        <result column="company_name" property="companyName" />
+        <result column="store_name" property="storeName" />
+        <result column="follow_agent" property="followAgent" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, agent_name AS agentName, agent_phone AS agentPhone, agent_location AS agentLocation, create_time AS createTime, active_date AS activeDate, last_active_time AS lastActiveTime, city_id AS cityId, company_name AS companyName, store_name AS storeName, follow_agent AS followAgent
+    </sql>
+
+</mapper>
