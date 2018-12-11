@@ -1,6 +1,8 @@
 package com.xfj.spider.mapper;
 
 import com.xfj.spider.model.Tephone;
+import com.xfj.spider.util.MyMapper;
+
 /**
  * 经纪人电话信息表 Mapper 接口
  * TephoneMapper

@@ -1,10 +1,16 @@
 package com.xfj.spider.config;
 
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
@@ -23,11 +29,11 @@ public class MyBatisMapperScannerConfig {
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        mapperScannerConfigurer.setBasePackage("com.kx.springboot.dao.mybatis");
+        mapperScannerConfigurer.setBasePackage("com.xfj.spider.mapper");
 
         //初始化扫描器的相关配置，这里我们要创建一个Mapper的父类
         Properties properties = new Properties();
-        properties.setProperty("mappers", "com.xfj.spider.mapper.MyMapper");
+        properties.setProperty("mappers", "com.xfj.spider.util.MyMapper");
         properties.setProperty("notEmpty", "false");
         properties.setProperty("IDENTITY", "MYSQL");
 
@@ -35,5 +41,6 @@ public class MyBatisMapperScannerConfig {
 
         return mapperScannerConfigurer;
     }
+
 
 }

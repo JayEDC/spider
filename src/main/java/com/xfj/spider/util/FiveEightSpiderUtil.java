@@ -64,6 +64,7 @@ public class FiveEightSpiderUtil implements PageProcessor {
         //System.out.println(str);
         webDriver.close();*/
 
+
     }
 
 
@@ -72,23 +73,20 @@ public class FiveEightSpiderUtil implements PageProcessor {
     @Override
     public void process(Page page) {
 
-
+        page.getHtml();
     }
 
     @Override
     public Site getSite() {
-        return null;
+        return site;
     }
 
     public static void main(String[] args) {
 
-        System.setProperty("selenuim_config", "D://config.ini");
-        String url ="https://www.58.com/changecity.html?catepath=ershoufang&catename=%E4%BA%8C%E6%89%8B%E6%88%BF&fullpath=1,12&PGTID=0d30000c-0038-f227-b760-34098987f1da&ClickID=1";
-        Spider.create(new FiveEightSpiderUtil())
-                .setDownloader(new SeleniumDownloader("D://chromedriver.exe"))
-                .addUrl(url).thread(5).run();
-
-
+       // String url ="https://www.58.com/changecity.html?catepath=ershoufang&catename=%E4%BA%8C%E6%89%8B%E6%88%BF&fullpath=1,12&PGTID=0d30000c-0038-f227-b760-34098987f1da&ClickID=1";
+        //Spider.create(new FiveEightSpiderUtil()).setDownloader(new SeleniumDownloader(path+"/src/main/resources/chrome/chromedriver")).addUrl(url).thread(5).run();
+        String url ="http://zh.esf.fang.com/newsecond/esfcities.aspx";
+        Spider.create(new FiveEightSpiderUtil()).setDownloader(new SeleniumDownloader(path+"/src/main/resources/chrome/chromedriver")).addUrl(url).thread(5).run();
 
 
     }

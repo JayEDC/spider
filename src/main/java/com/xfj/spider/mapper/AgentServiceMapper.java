@@ -1,6 +1,8 @@
 package com.xfj.spider.mapper;
 
 import com.xfj.spider.model.AgentService;
+import com.xfj.spider.util.MyMapper;
+
 /**
  * 经纪人服务表 Mapper 接口
  * AgentServiceMapper

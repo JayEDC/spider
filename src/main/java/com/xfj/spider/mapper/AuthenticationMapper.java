@@ -1,6 +1,8 @@
 package com.xfj.spider.mapper;
 
 import com.xfj.spider.model.Authentication;
+import com.xfj.spider.util.MyMapper;
+
 /**
  * 经纪人认证表 Mapper 接口
  * AuthenticationMapper

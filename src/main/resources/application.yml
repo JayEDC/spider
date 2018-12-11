@@ -4,7 +4,7 @@ spring:
       username: root
       password: 123456
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.10.17:3306/xft100?useUnicode=true&characterEncoding=utf8
+      url: jdbc:mysql://192.168.10.17:3306/spider?useUnicode=true&characterEncoding=utf8
       type: com.alibaba.druid.pool.DruidDataSource
       # 初始化大小，最小，最大
       initialSize: 5
@@ -60,7 +60,14 @@ mybatis-plus:
     cache-enabled: false
 
 
+mapper:
+  not-empty: false
+  identity: MYSQL
+  mappers: com.xfj.spider.mapper
+
+
 #设置端口
 server:
   port: 9099
+
 

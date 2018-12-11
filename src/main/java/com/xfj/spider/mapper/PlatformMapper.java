@@ -1,6 +1,8 @@
 package com.xfj.spider.mapper;
 
 import com.xfj.spider.model.Platform;
+import com.xfj.spider.util.MyMapper;
+
 /**
  * 平台表 Mapper 接口
  * PlatformMapper

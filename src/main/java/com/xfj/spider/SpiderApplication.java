@@ -29,8 +29,9 @@ import org.springframework.context.ApplicationContext;
   *          ┗━┻━┛   ┗━┻━┛
   *
   * */
-@MapperScan(value = "com.xfj.spider.mapper")
+
 @SpringBootApplication
+@MapperScan(value = "com.xfj.spider.mapper")
 @EnableCaching
 public class SpiderApplication {
 
