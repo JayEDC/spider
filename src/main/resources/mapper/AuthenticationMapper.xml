@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.AuthenticationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.Authentication">
+        <id column="an_id" property="anId" />
+        <result column="am_id" property="amId" />
+        <result column="an_type" property="anType" />
+        <result column="an_date" property="anDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        an_id AS anId, am_id AS amId, an_type AS anType, an_date AS anDate
+    </sql>
+
+</mapper>

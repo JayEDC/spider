@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.LinksMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.Links">
+        <id column="ls_id" property="lsId" />
+        <result column="ls_url" property="lsUrl" />
+        <result column="ls_crawl_status" property="lsCrawlStatus" />
+        <result column="pm_id" property="pmId" />
+        <result column="ls_type" property="lsType" />
+        <result column="ls_create_date" property="lsCreateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ls_id AS lsId, ls_url AS lsUrl, ls_crawl_status AS lsCrawlStatus, pm_id AS pmId, ls_type AS lsType, ls_create_date AS lsCreateDate
+    </sql>
+
+</mapper>

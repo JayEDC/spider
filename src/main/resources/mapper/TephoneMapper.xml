@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.TephoneMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.Tephone">
+        <id column="te_id" property="teId" />
+        <result column="te_telephone" property="teTelephone" />
+        <result column="te_location" property="teLocation" />
+        <result column="te_create_date" property="teCreateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        te_id AS teId, te_telephone AS teTelephone, te_location AS teLocation, te_create_date AS teCreateDate
+    </sql>
+
+</mapper>

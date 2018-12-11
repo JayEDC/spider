@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.ProxyIpMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.ProxyIp">
+        <id column="pp_id" property="ppId" />
+        <result column="pp_ip" property="ppIp" />
+        <result column="pp_port" property="ppPort" />
+        <result column="pp_status" property="ppStatus" />
+        <result column="pp_create_date" property="ppCreateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        pp_id AS ppId, pp_ip AS ppIp, pp_port AS ppPort, pp_status AS ppStatus, pp_create_date AS ppCreateDate
+    </sql>
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.AgentServiceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.AgentService">
+        <id column="ae_id" property="aeId" />
+        <result column="am_id" property="amId" />
+        <result column="ae_level" property="aeLevel" />
+        <result column="ae_score" property="aeScore" />
+        <result column="ae_create_date" property="aeCreateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ae_id AS aeId, am_id AS amId, ae_level AS aeLevel, ae_score AS aeScore, ae_create_date AS aeCreateDate
+    </sql>
+
+</mapper>

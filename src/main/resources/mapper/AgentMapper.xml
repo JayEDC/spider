@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.AgentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.Agent">
+        <id column="at_id" property="atId" />
+        <result column="te_id" property="teId" />
+        <result column="at_name" property="atName" />
+        <result column="at_sex" property="atSex" />
+        <result column="at_company" property="atCompany" />
+        <result column="at_photo" property="atPhoto" />
+        <result column="at_main_area" property="atMainArea" />
+        <result column="at_mian_location" property="atMianLocation" />
+        <result column="at_create_date" property="atCreateDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        at_id AS atId, te_id AS teId, at_name AS atName, at_sex AS atSex, at_company AS atCompany, at_photo AS atPhoto, at_main_area AS atMainArea, at_mian_location AS atMianLocation, at_create_date AS atCreateDate
+    </sql>
+
+</mapper>

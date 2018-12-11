@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.ResoldMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.Resold">
+        <id column="rd_id" property="rdId" />
+        <result column="am_id" property="amId" />
+        <result column="rd_name" property="rdName" />
+        <result column="rd_price" property="rdPrice" />
+        <result column="td_status" property="tdStatus" />
+        <result column="td_location" property="tdLocation" />
+        <result column="rd_date" property="rdDate" />
+        <result column="rd_url" property="rdUrl" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        rd_id AS rdId, am_id AS amId, rd_name AS rdName, rd_price AS rdPrice, td_status AS tdStatus, td_location AS tdLocation, rd_date AS rdDate, rd_url AS rdUrl
+    </sql>
+
+</mapper>

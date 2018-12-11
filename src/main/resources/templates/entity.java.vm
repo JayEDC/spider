@@ -13,8 +13,7 @@ import lombok.experimental.Accessors;
 #end
 
 /**
- * $!{entity} modle
- * $!{table.comment}
+ * $!{table.comment} modle
  * @author ${author}
  * @since ${date}
  */
