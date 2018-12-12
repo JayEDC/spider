@@ -31,7 +31,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.downloader.selenium.SeleniumDownloader;
+
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import java.io.File;

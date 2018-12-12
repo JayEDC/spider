@@ -10,6 +10,7 @@ import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -40,13 +41,16 @@ class WebDriverPool {
 
 	private AtomicInteger stat = new AtomicInteger(STAT_RUNNING);
 
+	private static File file = new File("");
+	private static String path = file.getAbsolutePath();
+
 	/*
 	 * new fields for configuring phantomJS
 	 */
 	private WebDriver mDriver = null;
 	private boolean mAutoQuitDriver = true;
 
-	private static final String DEFAULT_CONFIG_FILE = "config.ini";
+	private static final String DEFAULT_CONFIG_FILE = path+"/src/main/resources/config.ini";
 	private static final String DRIVER_FIREFOX = "firefox";
 	private static final String DRIVER_CHROME = "chrome";
 	private static final String DRIVER_PHANTOMJS = "phantomjs";
@@ -136,9 +140,10 @@ class WebDriverPool {
 		} else if (driver.equals(DRIVER_FIREFOX)) {
 			mDriver = new FirefoxDriver(sCaps);
 		} else if (driver.equals(DRIVER_CHROME)) {
+			System.getProperties().setProperty("webdriver.chrome.driver", path+"/src/main/resources/chrome/chromedriver");
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.addArguments("--headless");
-			mDriver = new ChromeDriver(chromeOptions);
+			mDriver  = new ChromeDriver(chromeOptions);
 		} else if (driver.equals(DRIVER_PHANTOMJS)) {
 			mDriver = new PhantomJSDriver(sCaps);
 		}
