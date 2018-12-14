@@ -60,6 +60,16 @@ public class Rent extends Model<Rent> {
     @TableField("rt_url")
     private String rtUrl;
 
+    @TableField("rt_create_date")
+    private Date rtCreateDate;
+
+    public Date getRtCreateDate() {
+        return rtCreateDate;
+    }
+
+    public void setRtCreateDate(Date rtCreateDate) {
+        this.rtCreateDate = rtCreateDate;
+    }
 
     public Integer getRtId() {
         return rtId;

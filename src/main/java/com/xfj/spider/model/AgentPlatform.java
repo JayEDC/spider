@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 /**
@@ -22,6 +25,7 @@ public class AgentPlatform extends Model<AgentPlatform> {
      * 经纪人id,自增
      */
     @TableId(value = "am_id", type = IdType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer amId;
     /**
      * 经纪人id 
@@ -43,12 +47,26 @@ public class AgentPlatform extends Model<AgentPlatform> {
      */
     @TableField("am_create_date")
     private Date amCreateDate;
+
+    /**
+     * 更新信息日期
+     */
+    @TableField("am_update_date")
+    private Date amUpdateDate;
     /**
      * 经纪人链接
      */
     @TableField("am_url")
     private String amUrl;
 
+
+    public Date getAmUpdateDate() {
+        return amUpdateDate;
+    }
+
+    public void setAmUpdateDate(Date amUpdateDate) {
+        this.amUpdateDate = amUpdateDate;
+    }
 
     public Integer getAmId() {
         return amId;

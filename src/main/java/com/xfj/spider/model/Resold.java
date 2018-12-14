@@ -61,6 +61,17 @@ public class Resold extends Model<Resold> {
     private String rdUrl;
 
 
+    @TableField("rd_create_date")
+    private Date rdCreateDate;
+
+    public Date getRdCreateDate() {
+        return rdCreateDate;
+    }
+
+    public void setRdCreateDate(Date rdCreateDate) {
+        this.rdCreateDate = rdCreateDate;
+    }
+
     public Integer getRdId() {
         return rdId;
     }

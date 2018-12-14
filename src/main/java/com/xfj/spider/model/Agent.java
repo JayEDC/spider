@@ -6,12 +6,15 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 /**
- * 经纪人表 modle
+ * 经纪人表 model
  * @author xnc
- * @since 2018-12-11
+ * @since 2018-12-13
  */
 @TableName("agent")
 public class Agent extends Model<Agent> {
@@ -22,12 +25,18 @@ public class Agent extends Model<Agent> {
      * 经纪人id,自增
      */
     @TableId(value = "at_id", type = IdType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer atId;
     /**
      * 经纪人id
      */
     @TableField("te_id")
     private Integer teId;
+    /**
+     * 采集城市
+     */
+    @TableField("at_city")
+    private String atCity;
     @TableField("at_name")
     private String atName;
     @TableField("at_sex")
@@ -50,14 +59,39 @@ public class Agent extends Model<Agent> {
     /**
      * 主营小区
      */
-    @TableField("at_mian_location")
-    private String atMianLocation;
+    @TableField("at_main_location")
+    private String atMainLocation;
     /**
      * 获取日期
      */
     @TableField("at_create_date")
     private Date atCreateDate;
+    /**
+     * 获取日期
+     */
+    @TableField("at_active_date")
+    private Date atActiveDate;
+    /**
+     * 获取日期
+     */
+    @TableField("at_house_count")
+    private int atHouseCount;
 
+    public Date getAtActiveDate() {
+        return atActiveDate;
+    }
+
+    public void setAtActiveDate(Date atActiveDate) {
+        this.atActiveDate = atActiveDate;
+    }
+
+    public int getAtHouseCount() {
+        return atHouseCount;
+    }
+
+    public void setAtHouseCount(int atHouseCount) {
+        this.atHouseCount = atHouseCount;
+    }
 
     public Integer getAtId() {
         return atId;
@@ -73,6 +107,14 @@ public class Agent extends Model<Agent> {
 
     public void setTeId(Integer teId) {
         this.teId = teId;
+    }
+
+    public String getAtCity() {
+        return atCity;
+    }
+
+    public void setAtCity(String atCity) {
+        this.atCity = atCity;
     }
 
     public String getAtName() {
@@ -115,12 +157,12 @@ public class Agent extends Model<Agent> {
         this.atMainArea = atMainArea;
     }
 
-    public String getAtMianLocation() {
-        return atMianLocation;
+    public String getAtMainLocation() {
+        return atMainLocation;
     }
 
-    public void setAtMianLocation(String atMianLocation) {
-        this.atMianLocation = atMianLocation;
+    public void setAtMainLocation(String atMainLocation) {
+        this.atMainLocation = atMainLocation;
     }
 
     public Date getAtCreateDate() {
@@ -141,12 +183,13 @@ public class Agent extends Model<Agent> {
         return "Agent{" +
         ", atId=" + atId +
         ", teId=" + teId +
+        ", atCity=" + atCity +
         ", atName=" + atName +
         ", atSex=" + atSex +
         ", atCompany=" + atCompany +
         ", atPhoto=" + atPhoto +
         ", atMainArea=" + atMainArea +
-        ", atMianLocation=" + atMianLocation +
+        ", atMianLocation=" + atMainLocation +
         ", atCreateDate=" + atCreateDate +
         "}";
     }
