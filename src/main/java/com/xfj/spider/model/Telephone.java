@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -24,6 +25,7 @@ public class Telephone extends Model<Telephone> {
     /**
      * 电话主键，自增
      */
+    @Id
     @TableId(value = "te_id", type = IdType.AUTO)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer teId;

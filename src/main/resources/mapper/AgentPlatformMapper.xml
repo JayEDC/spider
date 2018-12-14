@@ -2,19 +2,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xfj.spider.mapper.AgentPlatformMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.xfj.spider.model.AgentPlatform">
-        <id column="am_id" property="amId" />
-        <result column="at_id" property="atId" />
-        <result column="pm_id" property="pmId" />
-        <result column="am_work_day" property="amWorkDay" />
-        <result column="am_create_date" property="amCreateDate" />
-        <result column="am_url" property="amUrl" />
-    </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        am_id AS amId, at_id AS atId, pm_id AS pmId, am_work_day AS amWorkDay, am_create_date AS amCreateDate, am_url AS amUrl
-    </sql>
 
 </mapper>

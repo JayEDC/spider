@@ -2,18 +2,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xfj.spider.mapper.CommentMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.xfj.spider.model.Comment">
-        <id column="ct_id" property="ctId" />
-        <result column="am_id" property="amId" />
-        <result column="ct_content" property="ctContent" />
-        <result column="ct_date" property="ctDate" />
-        <result column="ct_score" property="ctScore" />
-    </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        ct_id AS ctId, am_id AS amId, ct_content AS ctContent, ct_date AS ctDate, ct_score AS ctScore
-    </sql>
 
 </mapper>

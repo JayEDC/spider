@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -24,6 +25,7 @@ public class AgentPlatform extends Model<AgentPlatform> {
     /**
      * 经纪人id,自增
      */
+    @Id
     @TableId(value = "am_id", type = IdType.AUTO)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer amId;
