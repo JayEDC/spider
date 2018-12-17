@@ -14,7 +14,7 @@ public class IpUtil {
 
     public static void checkIp(EsfToolsSpiderProxyIp esfToolsSpiderProxyIp){
         try {
-            String htmlJump = HttpUtil.getData("https://jxjump.58.com", esfToolsSpiderProxyIp.getIpAddr(), esfToolsSpiderProxyIp.getIpPort());
+           /* String htmlJump = HttpUtil.getData("https://jxjump.58.com", esfToolsSpiderProxyIp.getIpAddr(), esfToolsSpiderProxyIp.getIpPort());
             if(htmlJump != null){
                 IPDataCache.loadProxyIp(esfToolsSpiderProxyIp,"proxyIpCacheforJump58");
             }
@@ -28,7 +28,7 @@ public class IpUtil {
             String htmlShort = HttpUtil.getData("https://short.58.com",esfToolsSpiderProxyIp.getIpAddr(),esfToolsSpiderProxyIp.getIpPort());
             if(htmlShort != null){
                 IPDataCache.loadProxyIp(esfToolsSpiderProxyIp,"proxyIpCacheforShort58");
-            }
+            }*/
 
             IPDataCache.loadProxyIp(esfToolsSpiderProxyIp,"proxyIpCache");
 

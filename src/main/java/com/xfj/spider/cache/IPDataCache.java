@@ -3,7 +3,6 @@ package com.xfj.spider.cache;
 import com.xfj.spider.common.Constant;
 import com.xfj.spider.mapper.EsfToolsSpiderProxyIpMapper;
 import com.xfj.spider.model.EsfToolsSpiderProxyIp;
-import com.xfj.spider.service.SpiderRecordService;
 import com.xfj.spider.service.impl.SpiderRecordServiceImpl;
 import com.xfj.spider.util.HttpUtil;
 import com.xfj.spider.util.SpringUtil;
@@ -19,8 +18,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 import java.util.*;
@@ -56,7 +53,7 @@ public class IPDataCache {
     }
     public static void  initIpCatch(){
         delNotFastProxyIp();
-        spiderRecordService.loadLocalProxyIp();
+        //spiderRecordService.loadLocalProxyIp();
         spiderRecordService.loadProxyIp();
         filterAvailable();
     }
@@ -156,6 +153,14 @@ public class IPDataCache {
         else{
             return null;
         }
+    }
+
+    /**
+     * 返回所有缓存中的IP地址信息
+     * @return
+     */
+    public static ArrayList<EsfToolsSpiderProxyIp> getProxyList(){
+        return proxyIpCache;
     }
 
     /**
@@ -294,8 +299,9 @@ public class IPDataCache {
             spiderProxyIpList.add(model);
         }
         //插入新检测可用的IP
-        if(spiderProxyIpList!=null && spiderProxyIpList.size()>0)
+        if(spiderProxyIpList!=null && spiderProxyIpList.size()>0) {
             esfToolsSpiderProxyIpMapper.insertList(spiderProxyIpList);
+        }
         try {
             httpClient.close();
             if(response != null){

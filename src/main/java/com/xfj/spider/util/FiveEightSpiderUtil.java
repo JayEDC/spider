@@ -1,6 +1,8 @@
 package com.xfj.spider.util;
+import java.util.Date;
+import java.util.*;
 
- /** not bug with the project
+/** not bug with the project
   *
   *      ┏┛ ┻━━━━━┛ ┻┓
   *      ┃　　　　　　 ┃
@@ -22,18 +24,41 @@ package com.xfj.spider.util;
   * */
 
 import com.xfj.spider.cache.IPDataCache;
+import com.xfj.spider.mapper.AgentMapper;
+import com.xfj.spider.mapper.TelephoneMapper;
+import com.xfj.spider.model.Agent;
+import com.xfj.spider.model.AgentPlatform;
+import com.xfj.spider.model.EsfToolsSpiderProxyIp;
+import com.xfj.spider.model.Telephone;
+import com.xfj.spider.service.impl.AgentPlatformServiceImpl;
+import com.xfj.spider.service.impl.AgentServiceImpl;
+import com.xfj.spider.service.impl.AgentServiceServiceImpl;
+import com.xfj.spider.service.impl.TelephoneServiceImpl;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.http.HttpHost;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.context.ApplicationContext;
 import us.codecraft.webmagic.Page;
+import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 
+import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.processor.PageProcessor;
 
+import us.codecraft.webmagic.proxy.SimpleProxyProvider;
+import us.codecraft.webmagic.selector.Html;
+import us.codecraft.webmagic.selector.Selectable;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
 import java.io.File;
 
 /**
@@ -73,7 +98,83 @@ public class FiveEightSpiderUtil implements PageProcessor {
     @Override
     public void process(Page page) {
 
-        page.getHtml();
+        //判断页面类型
+        if(page.getHtml().xpath("//*[@id=\"content-title\"]").get() != null && page.getHtml().xpath("//*[@id=\"content-title\"]").get().contains("按省份首字母选择")){
+            //获取所有的城市连接
+            List<String> links = page.getHtml().xpath("//*[@id=\"content-box\"]/div[3]/div[1]").links().all();
+            page.addTargetRequests(links);
+        }else if(page.getHtml().xpath("/html/body/div[5]/div[4]/a[2]").get() != null && page.getHtml().xpath("/html/body/div[5]/div[4]/a[2]").get().contains("二手房出售")){
+            Html html = page.getHtml();
+            //获取列表所有url地址
+            List<String> links = html.css(".house-list-wrap .list-info .title a").links().all();
+            page.addTargetRequests(links);
+            //获取下一页url
+            List<String> pageLinks = html.xpath("/html/body/div[5]/div[5]/div[1]/div[2]/a[4]").links().all();
+            page.addTargetRequests(pageLinks);
+        }else if(page.getHtml().xpath("//*[@id=\"houseChatEntry\"]/div/p[2]").get() != null && page.getHtml().xpath("//*[@id=\"houseChatEntry\"]/div/p[2]").get().contains("电话联系TA")){
+            //获取经纪人信息url
+            List<String> agentLinks = page.getHtml().xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div[1]/a").links().all();
+            page.addTargetRequests(agentLinks);
+            System.out.println("--------- 当前池中连接数量 -------------" + page.getTargetRequests().size());
+        } else if (page.getHtml().xpath("/html/body/div[2]/div[2]/div[2]/div[1]/span").get() != null && page.getHtml().xpath("/html/body/div[2]/div[2]/div[2]/div[1]/span").get().contains("经纪人")) {
+            Html html = page.getHtml();
+            //获取经纪人名称
+            String agentName = html.xpath("/html/body/div[2]/div[2]/div[2]/div[1]/text()").get().trim();
+            //经纪人电话
+            String agentPhone = html.xpath("//*[@id=\"userPhone\"]/text()").get().trim();
+            //经纪人公司
+            String agentCompany = html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[3]/span/text()").get().trim();
+            //经纪人照片
+            String agentPhoto = html.css(".info-head-img").css("img","src").get();
+            //经纪人主营区域
+            String area =  html.css(".zymk li","text").all().toString().trim();
+            //经纪人主营小区
+            String location = html.css(".zyxq li a","text").all().toString().trim();
+            //经纪人工作年限
+            String workDay = html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[2]/span/text()").get().trim();
+            int work = StringUtil.stringToInt(workDay.substring(0,workDay.length()-1));
+            //经纪人link
+            String url = page.getUrl().get();
+            //经纪人城市
+            String city = html.xpath("//*[@id=\"commonTopbar\"]/div/div[1]/h2/text()").get().trim();
+            //房源总数
+            int count = StringUtil.stringToInt(html.css(".paging-list .current","text").toString());
+            int houseCount = html.css(".agent-list-content li").all().size();
+            houseCount = (count-1) * 10 + houseCount;
+
+            AgentServiceImpl agentService = SpringUtil.getBean(AgentServiceImpl.class);
+            AgentPlatformServiceImpl agentPlatformService = SpringUtil.getBean(AgentPlatformServiceImpl.class);
+            TelephoneServiceImpl telephoneService = SpringUtil.getBean(TelephoneServiceImpl.class);
+
+            //经纪人电话信息
+            Telephone telephone = new Telephone();
+            telephone.setTeTelephone(agentPhone);
+            telephone.setTeCreateDate(new Date());
+            int t = telephoneService.save(telephone);
+            //经纪人信息
+            Agent agent = new Agent();
+            agent.setAtActiveDate(new Date());
+            agent.setTeId(telephone.getTeId());
+            agent.setAtCity(city);
+            agent.setAtName(agentName);
+            agent.setAtCompany(agentCompany);
+            agent.setAtPhoto(agentPhoto);
+            agent.setAtMainArea(area);
+            agent.setAtMainLocation(location);
+            agent.setAtCreateDate(new Date());
+            agent.setAtHouseCount(houseCount);
+            int i = agentService.save(agent);
+            //经纪人平台信息
+            AgentPlatform agentPlatform = new AgentPlatform();
+            agentPlatform.setAmUpdateDate(new Date());
+            agentPlatform.setAtId(agent.getAtId());
+            agentPlatform.setPmId(2);
+            agentPlatform.setAmWorkDay(work);
+            agentPlatform.setAmCreateDate(new Date());
+            agentPlatform.setAmUrl(url);
+            int p = agentPlatformService.save(agentPlatform);
+
+        }
     }
 
     @Override
@@ -81,16 +182,71 @@ public class FiveEightSpiderUtil implements PageProcessor {
         return site;
     }
 
-    public static void main(String[] args) {
+    public void main() {
 
-       // String url ="https://www.58.com/changecity.html?catepath=ershoufang&catename=%E4%BA%8C%E6%89%8B%E6%88%BF&fullpath=1,12&PGTID=0d30000c-0038-f227-b760-34098987f1da&ClickID=1";
-        //Spider.create(new FiveEightSpiderUtil()).setDownloader(new SeleniumDownloader(path+"/src/main/resources/chrome/chromedriver")).addUrl(url).thread(5).run();
-        String url ="http://zh.esf.fang.com/newsecond/esfcities.aspx";
-        Spider.create(new FiveEightSpiderUtil()).setDownloader(new SeleniumDownloader(path+"/src/main/resources/chrome/chromedriver")).addUrl(url).thread(5).run();
+        ApplicationContext context =SpringUtil.getApplicationContext();
+        //获取代理 ip
+        ArrayList<EsfToolsSpiderProxyIp> spiderProxyIpList = IPDataCache.getProxyList();
+        //设置代理IP
+        /*Proxy[] proxyArray = new Proxy[spiderProxyIpList.size()];
+        for(int i=0;i<spiderProxyIpList.size();i++){
+            EsfToolsSpiderProxyIp spiderProxyIp = spiderProxyIpList.get(i);
+            //IP地址
+            String proxyIp = spiderProxyIp.getIpAddr();
+            //端口
+            Integer port = spiderProxyIp.getIpPort();
+            //设置代理池
+            Proxy proxy = new Proxy(proxyIp,port);
+            proxyArray[i] = proxy;
+        }*/
+        /*//失败后切换代理ip
+        HttpClientDownloader httpClientDownloader = new HttpClientDownloader(){
+            @Override
+            protected void onError(Request request) {
+                setProxyProvider(SimpleProxyProvider.from(proxyArray));
+            }
+        };*/
 
+        String url ="https://gz.58.com/ershoufang/?PGTID=0d00000c-0000-01a2-1245-beb0cd841878&ClickID=1";
+        String url1 ="https://broker.58.com/gz/detail/1968759.shtml?token=073b31a116ee5256c89a372a7d5989e448b01532&PGTID=0d40000c-03e1-b089-d492-bd1e4e79c6cc&ClickID=6";
+        Spider spider = Spider.create(new FiveEightSpiderUtil());
+        spider.setDownloader(new SeleniumDownloader().setSleepTime(1000));
+        spider.addUrl(url1);
+        spider.thread(1);
+        spider.run();
 
     }
 
+
+
+    /*@Test
+    public void ProxyUsingChromeDriver()
+    {
+        //Set the location of the ChromeDriver
+        //System.setProperty("webdriver.chrome.driver", "/Users/lao/Downloads/chromedriver");
+        System.getProperties().setProperty("webdriver.chrome.driver", path+"/src/main/resources/chrome/chromedriver");
+        //Create a new desired capability
+        //DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        // Create a new proxy object and set the proxy
+        Proxy proxy = new Proxy();
+        proxy.setHttpProxy("192.168.10.58:8888");
+        //Add the proxy to our capabilities
+        //capabilities.setCapability("proxy", proxy);
+        //Start a new ChromeDriver using the capabilities object we created and added the proxy to
+        //ChromeDriver Driver = new ChromeDriver(capabilities);
+
+        // Proxy proxy = new Proxy();
+        //proxy.setHttpProxy("http://192.168.10.58:8888");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setHeadless(true);
+        chromeOptions.setCapability("proxy",proxy);
+        // chromeOptions.setCapability("proxy",proxy);
+        ChromeDriver Driver = new ChromeDriver(chromeOptions);
+
+        //Navigation to a url and a look at the traffic logged in fiddler
+        //Driver.navigate().to("http://www.baidu.com");
+        Driver.get("http://www.baidu.com");
+    }*/
 
 }
 

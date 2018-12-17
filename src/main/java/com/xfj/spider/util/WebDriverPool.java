@@ -1,12 +1,18 @@
 package com.xfj.spider.util;
 
+import com.xfj.spider.cache.IPDataCache;
+import com.xfj.spider.model.EsfToolsSpiderProxyIp;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -22,6 +28,7 @@ import java.util.Properties;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
 
 /**
  * @author code4crafter@gmail.com <br>
@@ -141,9 +148,26 @@ class WebDriverPool {
 			mDriver = new FirefoxDriver(sCaps);
 		} else if (driver.equals(DRIVER_CHROME)) {
 			System.getProperties().setProperty("webdriver.chrome.driver", path+"/src/main/resources/chrome/chromedriver");
+			Proxy proxy = new Proxy();
+			//获取代理 ip
+			EsfToolsSpiderProxyIp proxyIp = IPDataCache.getRandomProxyIp();
+			proxy.setSocksUsername("1459792453@qq.com");
+			proxy.setSocksPassword("Qwertyuiop123");
+			proxy.setHttpProxy(proxyIp.getIpAddr()+":"+proxyIp.getIpPort());
 			ChromeOptions chromeOptions = new ChromeOptions();
-			chromeOptions.addArguments("--headless");
+			chromeOptions.addArguments("Proxy-Authorization:Basic MTQ1OTc5MjQ1M0BxcS5jb20lM0FRd2VydHl1aW9wMTIz");
+			chromeOptions.addArguments("--user-agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'");
+			//chromeOptions.addArguments("--Proxy-Authorization='Basic MTQ1OTc5MjQ1M0BxcS5jb20lM0FRd2VydHl1aW9wMTIz'");
+			//chromeOptions.setHeadless(true);
+			//为了获取console的日志输出
+			/*DesiredCapabilities caps = DesiredCapabilities.chrome();
+			LoggingPreferences logPrefs = new LoggingPreferences();
+			logPrefs.enable(LogType.BROWSER, Level.INFO);
+			caps.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+			caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);*/
+			chromeOptions.setCapability("proxy",proxy);
 			mDriver  = new ChromeDriver(chromeOptions);
+			logger.info("---------重置ip！当前 ip-------------" + proxyIp.getIpAddr());
 		} else if (driver.equals(DRIVER_PHANTOMJS)) {
 			mDriver = new PhantomJSDriver(sCaps);
 		}
@@ -182,6 +206,10 @@ class WebDriverPool {
 
 	public WebDriverPool() {
 		this(DEFAULT_CAPACITY);
+	}
+	public void closeWebDriverList(WebDriver webDriver){
+		webDriverList.remove(webDriver);
+		logger.info("---------删除失效webDriver-------------" + webDriver.getCurrentUrl());
 	}
 
 	/**

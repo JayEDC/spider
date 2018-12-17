@@ -2,6 +2,7 @@ package com.xfj.spider;
 
 import com.xfj.spider.cache.IPDataCache;
 import com.xfj.spider.model.EsfToolsSpiderProxyIp;
+import com.xfj.spider.util.FiveEightSpiderUtil;
 import com.xfj.spider.util.SpringUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -40,6 +41,7 @@ public class SpiderApplication {
         SpringUtil.setApplicationContext(applicationContext);
         IPDataCache.initIpCatch();
         EsfToolsSpiderProxyIp esfToolsSpiderProxyIp = IPDataCache.getRandomProxyIp();
+        new FiveEightSpiderUtil().main();
         System.out.println("___________________"+esfToolsSpiderProxyIp.getIpAddr());
     }
 }
