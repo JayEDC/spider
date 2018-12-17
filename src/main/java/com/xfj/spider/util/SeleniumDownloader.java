@@ -120,35 +120,40 @@ public class SeleniumDownloader implements Downloader, Closeable {
                 }
             }
 
+			WebElement webElement = webDriver.findElement(By.xpath("/html"));
+			String content = webElement.getAttribute("outerHTML");
+			Html html = new Html(content, request.getUrl());
+
 			/**
 			 * 如果页面中出现 经纪人电话 进行点击事件，动态获取电话
 			 */
-            WebElement webElement = webDriver.findElement(By.xpath("//*[@id=\"userPhone\"]"));
-            if(null != webElement) {
-                webElement.click();
-                try {
-                    Thread.sleep(sleepTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-			/**
-			 * 如果经纪人存在房源则进行点击，获取最后一页，计算总数
-			 */
-			webElement = webDriver.findElement(By.xpath("/html"));
-			String content = webElement.getAttribute("outerHTML");
-			Html html = new Html(content, request.getUrl());
-			int count = html.css(".paging-list li").all().size();
-			webElement = webDriver.findElement(By.xpath("//*[@id=\"gent-list\"]/div[1]/div/ul/li["+count+"]"));
-            if (null != webElement){
-				webElement.click();
-				try {
-					Thread.sleep(sleepTime);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+			if(html.xpath("//*[@id=\"userPhone\"]").get()!=null){
+				webElement = webDriver.findElement(By.xpath("//*[@id=\"userPhone\"]"));
+				if(null != webElement) {
+					webElement.click();
+					try {
+						Thread.sleep(sleepTime);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
+			/**
+			 * 如果经纪人存在房源则进行点击，获取最后一页，计算总数
+			 */
+			if(html.xpath("/html/body/div[2]/div[2]/div[2]/div[1]/span").get()!= null){
+				int count = html.css(".paging-list li").all().size();
+				webElement = webDriver.findElement(By.xpath("//*[@id=\"gent-list\"]/div[1]/div/ul/li["+count+"]"));
+				if (null != webElement){
+					webElement.click();
+					try {
+						Thread.sleep(sleepTime);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 			/**
 			 * 最后获取html 页面返回
 			 */
