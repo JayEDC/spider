@@ -24,41 +24,24 @@ import java.util.*;
   * */
 
 import com.xfj.spider.cache.IPDataCache;
-import com.xfj.spider.mapper.AgentMapper;
-import com.xfj.spider.mapper.TelephoneMapper;
 import com.xfj.spider.model.Agent;
 import com.xfj.spider.model.AgentPlatform;
 import com.xfj.spider.model.EsfToolsSpiderProxyIp;
 import com.xfj.spider.model.Telephone;
 import com.xfj.spider.service.impl.AgentPlatformServiceImpl;
 import com.xfj.spider.service.impl.AgentServiceImpl;
-import com.xfj.spider.service.impl.AgentServiceServiceImpl;
 import com.xfj.spider.service.impl.TelephoneServiceImpl;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.http.HttpHost;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Proxy;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import com.xfj.spider.util.handler.downloader.AnjukeSeleniumDownloader;
+import com.xfj.spider.util.handler.downloader.SeleniumDownloader;
 import org.springframework.context.ApplicationContext;
 import us.codecraft.webmagic.Page;
-import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 
-import us.codecraft.webmagic.downloader.HttpClientDownloader;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import us.codecraft.webmagic.proxy.SimpleProxyProvider;
 import us.codecraft.webmagic.selector.Html;
-import us.codecraft.webmagic.selector.Selectable;
 
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
 import java.io.File;
 
 /**
@@ -169,7 +152,7 @@ public class FiveEightSpiderUtil implements PageProcessor {
             agentPlatform.setAmUpdateDate(new Date());
             agentPlatform.setAtId(agent.getAtId());
             agentPlatform.setPmId(2);
-            agentPlatform.setAmWorkDay(work);
+            agentPlatform.setAmWorkDay(work+"");
             agentPlatform.setAmCreateDate(new Date());
             agentPlatform.setAmUrl(url);
             int p = agentPlatformService.save(agentPlatform);

@@ -43,7 +43,7 @@ public class AgentPlatform extends Model<AgentPlatform> {
      * 工作年限或者注册平台时间
      */
     @TableField("am_work_day")
-    private Integer amWorkDay;
+    private String amWorkDay;
     /**
      * 获取日期
      */
@@ -94,11 +94,11 @@ public class AgentPlatform extends Model<AgentPlatform> {
         this.pmId = pmId;
     }
 
-    public Integer getAmWorkDay() {
+    public String getAmWorkDay() {
         return amWorkDay;
     }
 
-    public void setAmWorkDay(Integer amWorkDay) {
+    public void setAmWorkDay(String amWorkDay) {
         this.amWorkDay = amWorkDay;
     }
 

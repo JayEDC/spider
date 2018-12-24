@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/agent")
 public class AgentController {
+    @RequestMapping("/hello" +
+            "")
+    public String hello(){
+        return "hello world";
+    }
 
 }
 

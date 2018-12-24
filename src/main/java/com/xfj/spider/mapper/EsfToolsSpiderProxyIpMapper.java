@@ -12,7 +12,7 @@ import java.util.List;
  * @author xnc
  * @since 2018-12-04
  */
-@Mapper
+//@Mapper
 public interface EsfToolsSpiderProxyIpMapper extends MyMapper<EsfToolsSpiderProxyIp> {
     List<EsfToolsSpiderProxyIp> getFastProxyIpAll();
 

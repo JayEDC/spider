@@ -1,5 +1,6 @@
 package com.xfj.spider.util;
 
+import org.jsoup.Connection;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
 

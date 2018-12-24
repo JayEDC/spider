@@ -6,7 +6,7 @@ import javax.naming.ConfigurationException;
 
 /**
  * @ClassName Constant
- * @Description 常量类
+ * @description 常量类
  * @Author xnc
  * @Date 2018/12/43:10 PM
  * @return 1.0
