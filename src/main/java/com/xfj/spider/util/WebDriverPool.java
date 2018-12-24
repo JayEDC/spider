@@ -158,7 +158,7 @@ class WebDriverPool {
 			chromeOptions.addArguments("Proxy-Authorization:Basic MTQ1OTc5MjQ1M0BxcS5jb20lM0FRd2VydHl1aW9wMTIz");
 			chromeOptions.addArguments("--user-agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'");
 			//chromeOptions.addArguments("--Proxy-Authorization='Basic MTQ1OTc5MjQ1M0BxcS5jb20lM0FRd2VydHl1aW9wMTIz'");
-			//chromeOptions.setHeadless(true);
+			chromeOptions.setHeadless(true);
 			//为了获取console的日志输出
 			/*DesiredCapabilities caps = DesiredCapabilities.chrome();
 			LoggingPreferences logPrefs = new LoggingPreferences();

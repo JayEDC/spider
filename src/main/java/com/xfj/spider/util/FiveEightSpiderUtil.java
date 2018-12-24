@@ -116,6 +116,11 @@ public class FiveEightSpiderUtil implements PageProcessor {
             List<String> agentLinks = page.getHtml().xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div[1]/a").links().all();
             page.addTargetRequests(agentLinks);
             System.out.println("--------- 当前池中连接数量 -------------" + page.getTargetRequests().size());
+        } else if(page.getHtml().xpath("/html/body/div[3]/div[4]").get() != null){
+            List<String> agentLinks = page.getHtml().css(".house-list-wrap li").links().all();
+            List<String> url = page.getHtml().css(".pager .next").links().all();
+            page.addTargetRequests(agentLinks);
+            page.addTargetRequests(url);
         } else if (page.getHtml().xpath("/html/body/div[2]/div[2]/div[2]/div[1]/span").get() != null && page.getHtml().xpath("/html/body/div[2]/div[2]/div[2]/div[1]/span").get().contains("经纪人")) {
             Html html = page.getHtml();
             //获取经纪人名称
@@ -123,22 +128,34 @@ public class FiveEightSpiderUtil implements PageProcessor {
             //经纪人电话
             String agentPhone = html.xpath("//*[@id=\"userPhone\"]/text()").get().trim();
             //经纪人公司
-            String agentCompany = html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[3]/span/text()").get().trim();
+            String agentCompany = null ;
+            if(html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[3]/span/text()").get().trim() != null){
+               agentCompany = html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[3]/span/text()").get().trim();
+            }
             //经纪人照片
             String agentPhoto = html.css(".info-head-img").css("img","src").get();
             //经纪人主营区域
             String area =  html.css(".zymk li","text").all().toString().trim();
             //经纪人主营小区
-            String location = html.css(".zyxq li a","text").all().toString().trim();
+            String location = null;
+            if( html.css(".zyxq li a","text").all().toString().trim() != null){
+                location = html.css(".zyxq li a","text").all().toString().trim();
+            }
             //经纪人工作年限
-            String workDay = html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[2]/span/text()").get().trim();
+            String workDay = null ;
+            if(html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[2]/span/text()").get().trim() != null ){
+                workDay = html.xpath("/html/body/div[2]/div[2]/div[2]/div[3]/div[2]/span/text()").get().trim();
+            }
             int work = StringUtil.stringToInt(workDay.substring(0,workDay.length()-1));
             //经纪人link
             String url = page.getUrl().get();
             //经纪人城市
             String city = html.xpath("//*[@id=\"commonTopbar\"]/div/div[1]/h2/text()").get().trim();
             //房源总数
-            int count = StringUtil.stringToInt(html.css(".paging-list .current","text").toString());
+            int count = 0;
+            if(html.css(".paging-list .current","text").toString() != null){
+                count = StringUtil.stringToInt(html.css(".paging-list .current","text").toString());
+            }
             int houseCount = html.css(".agent-list-content li").all().size();
             houseCount = (count-1) * 10 + houseCount;
 
@@ -173,6 +190,9 @@ public class FiveEightSpiderUtil implements PageProcessor {
             agentPlatform.setAmCreateDate(new Date());
             agentPlatform.setAmUrl(url);
             int p = agentPlatformService.save(agentPlatform);
+            if(t == 1 && i == 1 && p == 1){
+                System.out.println("添加经纪人成功！姓名：" + agentName +" ---------- 电话:"+agentPhone);
+            }
 
         }
     }
@@ -208,11 +228,11 @@ public class FiveEightSpiderUtil implements PageProcessor {
         };*/
 
         String url ="https://gz.58.com/ershoufang/?PGTID=0d00000c-0000-01a2-1245-beb0cd841878&ClickID=1";
-        String url1 ="https://broker.58.com/gz/detail/1968759.shtml?token=073b31a116ee5256c89a372a7d5989e448b01532&PGTID=0d40000c-03e1-b089-d492-bd1e4e79c6cc&ClickID=6";
+        String url1 ="https://broker.58.com/sz/list/pn118/?PGTID=0d00000c-0000-019d-53b8-283b2ced00f7&ClickID=1";
         Spider spider = Spider.create(new FiveEightSpiderUtil());
         spider.setDownloader(new SeleniumDownloader().setSleepTime(1000));
         spider.addUrl(url1);
-        spider.thread(1);
+        spider.thread(5);
         spider.run();
 
     }
