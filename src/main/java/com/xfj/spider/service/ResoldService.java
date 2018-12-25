@@ -8,5 +8,6 @@ import com.xfj.spider.model.Resold;
  * @since 2018-12-11
  */
 public interface ResoldService extends IService<Resold> {
+    Integer createResold(Resold resold);
 
 }

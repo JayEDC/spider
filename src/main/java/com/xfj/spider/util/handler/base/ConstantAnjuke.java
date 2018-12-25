@@ -12,9 +12,10 @@ public class ConstantAnjuke {
     public static final String AGENTPAGEINFO =  "jjr";
     // 经济人页面再分
     // 二手房，租房，个人信息
-    public static final String ERSHOUFANG = "";
+    public static final String ERSHOUFANG = " ";
     public static final String ZUFANG="zf";
     public static final String AGENTINFO = "js";
 
     public static final String PIPEKEY="PIPE";
+    public static final String RESOLD ="RESOLD" ;
 }

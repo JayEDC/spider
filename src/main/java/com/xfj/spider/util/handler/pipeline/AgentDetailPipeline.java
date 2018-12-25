@@ -1,18 +1,16 @@
 package com.xfj.spider.util.handler.pipeline;
 
 
-import com.xfj.spider.dao.TelephoneAgentPlatformDao;
 import com.xfj.spider.model.Agent;
 import com.xfj.spider.model.AgentPlatform;
 import com.xfj.spider.model.Telephone;
 import com.xfj.spider.service.AgentService;
-import com.xfj.spider.service.TelephoneService;
+import com.xfj.spider.util.handler.base.ConstantAnjuke;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
-import com.xfj.spider.util.handler.base.ConstantAnjuke;
 
 /**
  * @author Lao SiCheng

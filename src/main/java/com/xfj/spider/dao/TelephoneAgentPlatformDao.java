@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Lao SiCheng
@@ -72,6 +74,17 @@ public class TelephoneAgentPlatformDao {
 
     public void updateAgentPlatform(AgentPlatform agentPlatform){
         agentPlatformMapper.updateByPrimaryKey(agentPlatform);
+    }
+
+    public Integer getAgentPlatformIdByKey(String telephone, String name, String company,Integer pmId){
+
+        Map<String ,Object> map = new HashMap<>();
+        map.put("telephone",telephone);
+        map.put("name",name);
+        map.put("company",company);
+        map.put("pmId",pmId);
+        return agentPlatformMapper.getAgentPlatform(map);
+       // return agentPlatformMapper.getAgentPlatformId(telephone,name, company, pmId);
     }
 
 }

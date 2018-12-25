@@ -1,5 +1,6 @@
 package com.xfj.spider.service.impl;
 
+import com.xfj.spider.dao.TelephoneAgentPlatformDao;
 import com.xfj.spider.mapper.AgentMapper;
 import com.xfj.spider.model.AgentPlatform;
 import com.xfj.spider.mapper.AgentPlatformMapper;
@@ -17,4 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AgentPlatformServiceImpl extends BaseService<AgentPlatform> implements AgentPlatformService {
 
+    @Autowired
+    TelephoneAgentPlatformDao telephoneAgentPlatformDao;
+    @Override
+    public Integer getAgentPlatformIdByKey(String telephoneNum, String name, String company, Integer pmId) {
+        return telephoneAgentPlatformDao.getAgentPlatformIdByKey(telephoneNum,name,company,pmId);
+    }
 }

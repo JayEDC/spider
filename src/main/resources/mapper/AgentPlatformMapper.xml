@@ -3,4 +3,13 @@
 <mapper namespace="com.xfj.spider.mapper.AgentPlatformMapper">
 
 
+    <select id="getAgentPlatform" resultType="java.lang.Integer" parameterType="map">
+
+      select am_id from agent_platform am left join agent at on am.at_id=at.at_id
+                                          left join telephone te on at.te_id = te.te_id
+                                          where te.te_telephone =#{telephone}
+                                          and at.at_name=#{name} and at.at_company=#{company}
+                                          and am.pm_id=#{pmId}
+                                          limit 1
+    </select>
 </mapper>

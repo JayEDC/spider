@@ -31,7 +31,8 @@ public class AgentListCrawl extends AbstractCrawl {
                     // 去掉一些不像的链接
                     if(this.checkUrlWithKey(link, ConstantAnjuke.AGENTPAGEINFO)){
                         // todo 注意这里，手动修改链接
-                        set.add(link+ConstantAnjuke.AGENTINFO+"/");
+                        //set.add(link+ConstantAnjuke.AGENTINFO+"/");
+                        set.add(link);
                     }
                 }
                 listLinks.clear();

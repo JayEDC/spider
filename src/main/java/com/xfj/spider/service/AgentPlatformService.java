@@ -8,5 +8,6 @@ import com.xfj.spider.model.AgentPlatform;
  * @since 2018-12-11
  */
 public interface AgentPlatformService extends IService<AgentPlatform> {
+    Integer getAgentPlatformIdByKey(String telephoneNum, String name, String company,Integer pmId);
 
 }
