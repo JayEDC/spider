@@ -1,4 +1,4 @@
-package com.xfj.spider.util;
+package com.xfj.spider.util.handler.downloader;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
@@ -13,7 +13,6 @@ import us.codecraft.webmagic.selector.PlainText;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 /**

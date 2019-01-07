@@ -1,14 +1,11 @@
 package com.xfj.spider;
 
-import com.xfj.spider.cache.IPDataCache;
-import com.xfj.spider.model.EsfToolsSpiderProxyIp;
-import com.xfj.spider.util.FiveEightSpiderUtil;
-import com.xfj.spider.util.SpringUtil;
-import org.mybatis.spring.annotation.MapperScan;
+import com.xfj.spider.util.handler.test.TestAgentCrawl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /** not bug with the project
   *
@@ -38,10 +35,15 @@ public class SpiderApplication {
 
     public static void main(String[] args) {
         ApplicationContext  applicationContext = SpringApplication.run(SpiderApplication.class, args);
-        SpringUtil.setApplicationContext(applicationContext);
-        IPDataCache.initIpCatch();
-        EsfToolsSpiderProxyIp esfToolsSpiderProxyIp = IPDataCache.getRandomProxyIp();
-        new FiveEightSpiderUtil().main();
-        System.out.println("___________________"+esfToolsSpiderProxyIp.getIpAddr());
+
+
+
+        //SpringUtil.setApplicationContext(applicationContext);
+        //IPDataCache.initIpCatch();
+        //EsfToolsSpiderProxyIp esfToolsSpiderProxyIp = IPDataCache.getRandomProxyIp();
+        //new FiveEightSpiderUtil().main();
+        TestAgentCrawl testAgentCrawl = applicationContext.getBean(TestAgentCrawl.class);
+        testAgentCrawl.testCrawAgentListAndDetail();
+       /// System.out.println("___________________"+esfToolsSpiderProxyIp.getIpAddr());
     }
 }
