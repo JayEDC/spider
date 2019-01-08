@@ -1,12 +1,10 @@
 package com.xfj.spider.util.handler.test;
 
-import com.xfj.spider.util.handler.crawl.Crawl;
+import com.xfj.spider.util.handler.base.TestCrawBase;
 import com.xfj.spider.util.handler.crawl.AgentDetailCrawl;
 import com.xfj.spider.util.handler.crawl.AgentListCrawl;
-import com.xfj.spider.util.handler.base.TestCrawBase;
-
-
-import org.junit.Test;
+import com.xfj.spider.util.handler.crawl.Crawl;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

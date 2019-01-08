@@ -1,4 +1,4 @@
-package com.xfj.spider.util;
+package com.xfj.spider.util.FiveEight;
 import java.util.Date;
 import java.util.*;
 
@@ -31,7 +31,8 @@ import com.xfj.spider.model.Telephone;
 import com.xfj.spider.service.impl.AgentPlatformServiceImpl;
 import com.xfj.spider.service.impl.AgentServiceImpl;
 import com.xfj.spider.service.impl.TelephoneServiceImpl;
-import com.xfj.spider.util.handler.downloader.AnjukeSeleniumDownloader;
+import com.xfj.spider.util.SpringUtil;
+import com.xfj.spider.util.StringUtil;
 import com.xfj.spider.util.handler.downloader.SeleniumDownloader;
 import org.springframework.context.ApplicationContext;
 import us.codecraft.webmagic.Page;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.HouseKnowledgeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.HouseKnowledge">
+        <id column="hs_id" property="hsId" />
+        <result column="pm_id" property="pmId" />
+        <result column="hs_type" property="hsType" />
+        <result column="hs_title" property="hsTitle" />
+        <result column="hs_sub_title" property="hsSubTitle" />
+        <result column="hs_tag" property="hsTag" />
+        <result column="hs_url" property="hsUrl" />
+        <result column="hs_abstract" property="hsAbstract" />
+        <result column="hs_time" property="hsTime" />
+        <result column="hs_spider_time" property="hsSpiderTime" />
+        <result column="hs_page_view" property="hsPageView" />
+        <result column="hs_source" property="hsSource" />
+        <result column="hs_html_part" property="hsHtmlPart" />
+        <result column="hs_text_part" property="hsTextPart" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        hs_id AS hsId, pm_id AS pmId, hs_type AS hsType, hs_title AS hsTitle, hs_sub_title AS hsSubTitle, hs_tag AS hsTag, hs_url AS hsUrl, hs_abstract AS hsAbstract, hs_time AS hsTime, hs_spider_time AS hsSpiderTime, hs_page_view AS hsPageView, hs_source AS hsSource, hs_html_part AS hsHtmlPart, hs_text_part AS hsTextPart
+    </sql>
+
+</mapper>
