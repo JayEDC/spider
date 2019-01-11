@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.HouseQuestionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.HouseQuestion">
+        <id column="hq_id" property="hqId" />
+        <result column="pm_id" property="pmId" />
+        <result column="hq_type" property="hqType" />
+        <result column="hq_content" property="hqContent" />
+        <result column="hq_question_count" property="hqQuestionCount" />
+        <result column="hq_publish_time" property="hqPublishTime" />
+        <result column="hq_spider_time" property="hqSpiderTime" />
+        <result column="hq_page_view" property="hqPageView" />
+        <result column="hq_question_user" property="hqQuestionUser" />
+        <result column="hq_question_user_photo" property="hqQuestionUserPhoto" />
+        <result column="hq_url" property="hqUrl" />
+        <result column="hq_tag" property="hqTag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        hq_id AS hqId, pm_id AS pmId, hq_type AS hqType, hq_content AS hqContent, hq_question_count AS hqQuestionCount, hq_publish_time AS hqPublishTime, hq_spider_time AS hqSpiderTime, hq_page_view AS hqPageView, hq_question_user AS hqQuestionUser, hq_question_user_photo AS hqQuestionUserPhoto, hq_url AS hqUrl, hq_tag AS hqTag
+    </sql>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.ReplyCommentsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.ReplyComments">
+        <id column="comments_id" property="commentsId" />
+        <result column="comments_user_photo" property="commentsUserPhoto" />
+        <result column="comments_user_name" property="commentsUserName" />
+        <result column="comments_time" property="commentsTime" />
+        <result column="comments_content" property="commentsContent" />
+        <result column="parent" property="parent" />
+        <result column="hq_id" property="hqId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        comments_id AS commentsId, comments_user_photo AS commentsUserPhoto, comments_user_name AS commentsUserName, comments_time AS commentsTime, comments_content AS commentsContent, parent, hq_id AS hqId
+    </sql>
+
+</mapper>

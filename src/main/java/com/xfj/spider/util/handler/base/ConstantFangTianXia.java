@@ -21,6 +21,31 @@ public class ConstantFangTianXia {
      * 采集数据类型
      */
     public static final String ZS = "zhishi";
+    /**
+     * 问答
+     */
+    public static final String ASK = "ask";
+    /**
+     * 问答详情
+     */
+    public static final String ASKINFO = "ask_";
+    /**
+     * 问答分类
+     */
+    public static final String DEFAULT = "default_";
+    /**
+     * 问答采集
+     */
+    public static final String QUESTIONPIPEKEY =  "question";
 
+    /**
+     * 问答采集评论类型
+     */
+    public static final String COMMENTS =  "comments";
+
+    /**
+     * 问答采集评论类型
+     */
+    public static final String COMMENTSCOUNT =  "count";
 
 }

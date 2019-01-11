@@ -10,10 +10,14 @@ import us.codecraft.webmagic.downloader.Downloader;
 
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.PlainText;
+import us.codecraft.webmagic.selector.Selectable;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+
+import static java.lang.Integer.parseInt;
 
 /**
  * 使用Selenium调用浏览器进行渲染。目前仅支持chrome。<br>
@@ -153,6 +157,87 @@ public class SeleniumDownloader implements Downloader, Closeable {
 					}
 				}
 			}
+
+			/**
+			 * 登录
+			 */
+			if(html.css("#sfHeadUsername").all().size() > 0){
+				webElement = webDriver.findElement(By.cssSelector("#sfHeadUsername"));
+				if (null != webElement){
+					webElement.click();
+					try {
+						Thread.sleep(sleepTime);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				webElement = webDriver.findElement(By.xpath("/html"));
+				content = webElement.getAttribute("outerHTML");
+				html = new Html(content, request.getUrl());
+			}
+
+			/**
+			 * 房天下 qq 登录
+			 */
+			if(html.css(".third-qq").all().size() > 0){
+				webElement = webDriver.findElement(By.cssSelector(".third-qq"));
+				if (null != webElement){
+					webElement.click();
+					try {
+						Thread.sleep(sleepTime);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				webDriver = webDriver.switchTo().frame("ptlogin_iframe");
+				webElement = webDriver.findElement(By.xpath("/html"));
+				content = webElement.getAttribute("outerHTML");
+				html = new Html(content, request.getUrl());
+			}
+
+			if(html.css(".img_out_focus").all().size() > 0){
+				webElement = webDriver.findElement(By.cssSelector("#img_out_1459792453"));
+				if (null != webElement){
+					webElement.click();
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				webElement = webDriver.findElement(By.xpath("/html"));
+				content = webElement.getAttribute("outerHTML");
+				html = new Html(content, request.getUrl());
+			}
+
+			/**
+			 * 评论点击
+			 */
+			if(html.css(".Ans_list").css(".Ans-area:not(div[id])").css(".com_agree em","text")!=null && html.css("#sfHeadUsername").all().size() > 0){
+				Selectable comm = html.css(".Ans_list").css(".Ans-area:not(div[id])");
+				List<String> list = comm.css(".com_agree em","text").all();
+				List<String> listId = html.css(".Ans_list").css(".Ans-area:not(div[id])").css(".com_agree","id").all();
+
+				for (int i=0;i<list.size();i++){
+					int count = parseInt(list.get(i));
+					if(count != 0){
+						webElement = webDriver.findElement(By.cssSelector("#"+listId.get(i)));
+						if (null != webElement){
+							webElement.click();
+							try {
+								Thread.sleep(sleepTime);
+								webElement = webDriver.findElement(By.xpath("/html"));
+								content = webElement.getAttribute("outerHTML");
+								html = new Html(content, request.getUrl());
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+					}
+				}
+
+			}
+
 			/**
 			 * 最后获取html 页面返回
 			 */
