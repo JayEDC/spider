@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @author xnc
  * @since 2019-01-10
  */
-@TableName("house_question")
+@TableName("house_question_comments.html")
 public class HouseQuestion extends Model<HouseQuestion> {
 
     private static final long serialVersionUID = 1L;

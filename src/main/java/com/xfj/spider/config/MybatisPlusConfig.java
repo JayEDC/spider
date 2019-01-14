@@ -35,7 +35,7 @@ import javax.sql.DataSource;
  * @Date 2018/11/2811:00 AM
  * @return 1.0
  **/
-@Configuration
+//@Configuration
 public class MybatisPlusConfig {
 
     @Bean
@@ -44,7 +44,7 @@ public class MybatisPlusConfig {
     }
 
     @Bean
-    @ConfigurationProperties("spring.datasource.druid." )
+    @ConfigurationProperties("spring.datasource.druid" )
     public DataSource dataSource() {
         return DruidDataSourceBuilder.create().build();
     }

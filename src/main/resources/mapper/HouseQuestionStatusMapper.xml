@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xfj.spider.mapper.HouseQuestionStatusMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xfj.spider.model.HouseQuestionStatus">
+        <id column="hs_id" property="hsId" />
+        <result column="hq_id" property="hqId" />
+        <result column="rc_id" property="rcId" />
+        <result column="hs_status" property="hsStatus" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        hs_id AS hsId, hq_id AS hqId, rc_id AS rcId, hs_status AS hsStatus
+    </sql>
+
+</mapper>

@@ -44,7 +44,7 @@ import java.util.Map;
  * @Date 2018/11/2810:13 AM
  * @return 1.0
  **/
-@Configuration
+//@Configuration
 public class DruidConfig {
 
 

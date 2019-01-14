@@ -62,7 +62,7 @@ public class MpGenerator {
     /**
      * table名字
      */
-    private static String[] table = new String[]{"resold"};
+    private static String[] table = new String[]{"house_question_status"};
     /**
      * table前缀
      */
@@ -74,9 +74,9 @@ public class MpGenerator {
     /**
      * 数据库信息
      */
-    private static String dataSourceUrl = "jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf8";
+    private static String dataSourceUrl = "jdbc:mysql://192.168.10.17:3306/spider?useUnicode=true&characterEncoding=utf8";
     private static String userName = "root";
-    private static String passWord = "root";
+    private static String passWord = "123456";
 
     public static void main(String[] args) {
 
