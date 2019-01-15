@@ -1,5 +1,6 @@
 package com.xfj.spider.util.handler.crawl;
 
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 
 import java.util.ArrayList;
