@@ -23,7 +23,7 @@
         hq_id AS hqId, pm_id AS pmId, hq_type AS hqType, hq_content AS hqContent, hq_question_count AS hqQuestionCount, hq_publish_time AS hqPublishTime, hq_spider_time AS hqSpiderTime, hq_page_view AS hqPageView, hq_question_user AS hqQuestionUser, hq_question_user_photo AS hqQuestionUserPhoto, hq_url AS hqUrl, hq_tag AS hqTag
     </sql>
 
-    <select id="getQuestionList" resultType="com.xfj.spider.vo.HouseQuestionVo" parameterType="map">
+    <select id="getQuestionList" resultType="com.xfj.spider.model.vo.HouseQuestionVo" parameterType="map">
         SELECT hq.hq_content,rc.comments_content,hq.hq_type,hq.hq_tag,hq.hq_publish_time,hqs.hs_status FROM house_question hq
         LEFT JOIN house_question_status hqs on hq.hq_id = hqs.hq_id
         LEFT JOIN reply_comments rc on hq.hq_url =rc.hq_url

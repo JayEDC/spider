@@ -7,7 +7,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
@@ -86,7 +85,7 @@ public class DruidConfig {
         bean.setFilter(new WebStatFilter());
         Map<String,String> initParams = new HashMap<>();
         //设置过滤静态资源
-        initParams.put("exclusions","/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        initParams.put("exclusions", "/templates/static/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
         bean.setInitParameters(initParams);
         //设置拦截请求
         bean.setUrlPatterns(Arrays.asList("/*"));

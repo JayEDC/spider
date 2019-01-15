@@ -2,7 +2,7 @@ package com.xfj.spider.mapper;
 
 import com.xfj.spider.model.HouseQuestion;
 import com.xfj.spider.util.MyMapper;
-import com.xfj.spider.vo.HouseQuestionVo;
+import com.xfj.spider.model.vo.HouseQuestionVo;
 
 import java.util.List;
 import java.util.Map;

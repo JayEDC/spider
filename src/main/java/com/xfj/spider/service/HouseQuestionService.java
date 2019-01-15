@@ -1,8 +1,8 @@
 package com.xfj.spider.service;
 
 import com.xfj.spider.model.HouseQuestion;
-import com.xfj.spider.vo.DataTableVo;
-import com.xfj.spider.vo.HouseQuestionVo;
+import com.xfj.spider.model.vo.DataTableVo;
+import com.xfj.spider.model.vo.HouseQuestionVo;
 
 import java.util.List;
 import java.util.Map;

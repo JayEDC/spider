@@ -1,13 +1,12 @@
 package com.xfj.spider.service.impl;
 
-import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
-import com.xfj.spider.model.HouseQuestion;
+import com.github.pagehelper.PageHelper;
 import com.xfj.spider.mapper.HouseQuestionMapper;
+import com.xfj.spider.model.HouseQuestion;
 import com.xfj.spider.service.HouseQuestionService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.xfj.spider.vo.DataTable;
-import com.xfj.spider.vo.DataTableVo;
-import com.xfj.spider.vo.HouseQuestionVo;
+import com.xfj.spider.model.vo.DataTable;
+import com.xfj.spider.model.vo.DataTableVo;
+import com.xfj.spider.model.vo.HouseQuestionVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
