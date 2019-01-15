@@ -1,11 +1,16 @@
 package com.xfj.spider;
 
-import com.xfj.spider.util.handler.test.TestAgentCrawl;
+import com.xfj.spider.util.FangTianXian.FangSpiderHouseZhishi;
+import com.xfj.spider.util.FangTianXian.FangSpiderQuestion;
+import com.xfj.spider.util.FiveEight.FiveEightSpiderUtil;
+import com.xfj.spider.util.SpringUtil;
+import com.xfj.spider.util.handler.crawl.FangCommentsCrawl;
+import com.xfj.spider.util.handler.crawl.FangZhiShiCrawl;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
-import tk.mybatis.spring.annotation.MapperScan;
 
 /** not bug with the project
   *
@@ -28,22 +33,41 @@ import tk.mybatis.spring.annotation.MapperScan;
   *
   * */
 
+
+
+
+/** The Pig
+ *                                    -
+ *      _._ _..._ .-',        _.._('))
+ *     '-.          /_       /    ',
+ *       )          \  .__.-'       /
+ *      /  -   -                      '
+ *     |   a   a                       \
+ *     \    .-.                        |
+ *      '-.('').-'             ,'      ;
+ *          '- ；               |      ;
+ *             \                \    .'
+ *             | ?   ._  _  __ _.-\  /
+ *             |  | |        / /  \ \
+ *             / ,|,|      /,/   /,/
+ *
+ * */
+
+
+
 @SpringBootApplication
 @MapperScan(value = "com.xfj.spider.mapper")
-@EnableCaching
+
 public class SpiderApplication {
 
     public static void main(String[] args) {
         ApplicationContext  applicationContext = SpringApplication.run(SpiderApplication.class, args);
-
-
-
         //SpringUtil.setApplicationContext(applicationContext);
         //IPDataCache.initIpCatch();
         //EsfToolsSpiderProxyIp esfToolsSpiderProxyIp = IPDataCache.getRandomProxyIp();
-        //new FiveEightSpiderUtil().main();
-        TestAgentCrawl testAgentCrawl = applicationContext.getBean(TestAgentCrawl.class);
-        testAgentCrawl.testCrawAgentListAndDetail();
-       /// System.out.println("___________________"+esfToolsSpiderProxyIp.getIpAddr());
+        /*FangSpiderQuestion fangSpiderQuestion = SpringUtil.getBean(FangSpiderQuestion.class);
+        fangSpiderQuestion.add(new FangCommentsCrawl());
+        fangSpiderQuestion.run("https://www.fang.com/ask/ask_32099089.html");*/
+        //System.out.println("___________________"+esfToolsSpiderProxyIp.getIpAddr());
     }
 }
