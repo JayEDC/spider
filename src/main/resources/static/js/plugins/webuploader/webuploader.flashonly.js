@@ -4618,5 +4618,5 @@
     ], function( preset ) {
         return preset;
     });
-    return require('properties/static/js/plugins/webuploader/webuploader');
+    return require('webuploader');
 });

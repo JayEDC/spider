@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,10 +44,12 @@ public class HouseQuestion extends Model<HouseQuestion> {
      * 问答回答数量
      */
     @TableField("hq_question_count")
+
     private Integer hqQuestionCount;
     /**
      * 问答发布时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @TableField("hq_publish_time")
     private String hqPublishTime;
     /**

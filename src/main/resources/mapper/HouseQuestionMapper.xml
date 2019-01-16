@@ -43,7 +43,7 @@
     </select>
 
     <select id="getCommentList" resultType="com.xfj.spider.model.vo.HouseQuestionVo" parameterType="map">
-        SELECT comments_user_name,comments_content FROM reply_comments
+        SELECT comments_user_name,comments_content,comments_id FROM reply_comments
         WHERE 1=1
         <if test="hqUrl != null">
             AND hq_url = #{hqUrl}
