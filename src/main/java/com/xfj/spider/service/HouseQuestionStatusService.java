@@ -8,5 +8,4 @@ import com.xfj.spider.model.HouseQuestionStatus;
  * @since 2019-01-14
  */
 public interface HouseQuestionStatusService extends IService<HouseQuestionStatus> {
-
 }

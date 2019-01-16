@@ -5,12 +5,11 @@ import com.xfj.spider.util.FangTianXian.FangSpiderQuestion;
 import com.xfj.spider.util.FiveEight.FiveEightSpiderUtil;
 import com.xfj.spider.util.SpringUtil;
 import com.xfj.spider.util.handler.crawl.FangCommentsCrawl;
-import com.xfj.spider.util.handler.crawl.FangZhiShiCrawl;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /** not bug with the project
   *
@@ -57,7 +56,6 @@ import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 @MapperScan(value = "com.xfj.spider.mapper")
-
 public class SpiderApplication {
 
     public static void main(String[] args) {

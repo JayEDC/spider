@@ -17,4 +17,6 @@ public interface HouseQuestionMapper extends MyMapper<HouseQuestion> {
 
     public List<HouseQuestionVo> getQuestionList(Map<String, Object> map);
 
+    public List<HouseQuestionVo> getCommentList(Map<String, Object> map);
+
 }

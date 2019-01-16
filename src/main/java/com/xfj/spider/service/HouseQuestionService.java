@@ -16,4 +16,6 @@ import java.util.Map;
 public interface HouseQuestionService extends IService<HouseQuestion> {
 
     public String getQuestionList(DataTableVo dataTableVo,Map<String, Object> map);
+
+    public String getCommentList(DataTableVo dataTableVo,Map<String, Object> map);
 }

@@ -34,5 +34,14 @@ public class HouseQuestionServiceImpl extends BaseService<HouseQuestion> impleme
         return DataTable.getInstance(list).toString();
     }
 
+    @Override
+    public String getCommentList(DataTableVo dataTableVo, Map<String, Object> map) {
+        int pageNum = dataTableVo.getStart()/dataTableVo.getLength()+1;
+        int pageSize = dataTableVo.getLength();
+        PageHelper.startPage(pageNum,pageSize);
+        List<HouseQuestionVo> list  = houseQuestionMapper.getCommentList(map);
+        return DataTable.getInstance(list).toString();
+    }
+
 
 }

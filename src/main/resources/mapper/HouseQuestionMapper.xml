@@ -3,6 +3,7 @@
 <mapper namespace="com.xfj.spider.mapper.HouseQuestionMapper">
 
     <!-- 通用查询映射结果 -->
+
     <resultMap id="BaseResultMap" type="com.xfj.spider.model.HouseQuestion">
         <id column="hq_id" property="hqId" />
         <result column="pm_id" property="pmId" />
@@ -24,22 +25,30 @@
     </sql>
 
     <select id="getQuestionList" resultType="com.xfj.spider.model.vo.HouseQuestionVo" parameterType="map">
-        SELECT hq.hq_content,rc.comments_content,hq.hq_type,hq.hq_tag,hq.hq_publish_time,hqs.hs_status FROM house_question hq
+        SELECT hq.hq_id,rc.comments_id,hq.hq_content,rc.comments_content,hq.hq_type,hq.hq_tag,hq.hq_publish_time,hqs.hs_status,hq.hq_url FROM house_question hq
         LEFT JOIN house_question_status hqs on hq.hq_id = hqs.hq_id
         LEFT JOIN reply_comments rc on hq.hq_url =rc.hq_url
         WHERE 1=1
-        <if test="hqType">
+        <if test="hqType!=null">
             AND hq.hq_type LIKE CONCAT('%',#{hqType},'%')
         </if>
-        <if test="hqTag">
+        <if test="hqTag!=null">
             AND hq.hq_tag LIKE CONCAT('%',#{hqTag},'%')
         </if>
-        <if test="hqContent">
+        <if test="hqContent !=null">
             AND hq.hq_content LIKE CONCAT('%',#{hqContent},'%')
         </if>
         GROUP BY hq.hq_id
+        ORDER BY hs_status asc
     </select>
 
+    <select id="getCommentList" resultType="com.xfj.spider.model.vo.HouseQuestionVo" parameterType="map">
+        SELECT comments_user_name,comments_content FROM reply_comments
+        WHERE 1=1
+        <if test="hqUrl != null">
+            AND hq_url = #{hqUrl}
+        </if>
+    </select>
 
 
 </mapper>
