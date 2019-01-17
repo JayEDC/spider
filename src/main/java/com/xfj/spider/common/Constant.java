@@ -1,5 +1,6 @@
 package com.xfj.spider.common;
 
+import com.xfj.spider.util.PropertiesFileUtil;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
 import javax.naming.ConfigurationException;
@@ -15,8 +16,11 @@ public class Constant {
 
     private static PropertiesConfiguration propertiesConfig;
 
-    static {
+    private static String interfaceType;
 
+    private static String interfaceName;
+
+    static {
         try {
             propertiesConfig = new PropertiesConfiguration("properties/config.properties");
             propertiesConfig.setEncoding("UTF-8");
@@ -28,7 +32,7 @@ public class Constant {
     //获取代理IP的URL地址(快代理)
     public static final String GET_PROXY_IP_URL = propertiesConfig.getString("ip.proxyUrl");
 
-    public static final String [] TEST_ADDR = new String [10];
+    public static final String[] TEST_ADDR = new String[10];
 
     //房源详情采集任务线程池大小
     public static final Integer DETAIL_THREAD_POOL_SIZE = 200;
@@ -39,7 +43,7 @@ public class Constant {
     //代理连接超时时长
     public static final Integer PROXY_CONNECT_TIME_OUT = 3000;
 
-    static{
+    static {
         //代理IP测试池
 
         //新浪
@@ -63,6 +67,38 @@ public class Constant {
         //中青网
         TEST_ADDR[9] = "http://www.youth.cn";
 
+    }
+
+    static {
+        setInterface("胡强");
+    }
+
+    public static String getInterfaceType() {
+        return interfaceType;
+    }
+
+    public static void setInterfaceType(String interfaceType) {
+        Constant.interfaceType = interfaceType;
+    }
+
+    public static String getInterfaceName() {
+        return interfaceName;
+    }
+
+    public static void setInterfaceName(String interfaceName) {
+        Constant.interfaceName = interfaceName;
+    }
+
+    public static String getNameEN(String nameCN){
+        if(nameCN.equals("胡强")){
+            return "huqiang";
+        }
+        return "";
+    }
+
+    public static void setInterface(String name){
+        interfaceName = name;
+        interfaceType = PropertiesFileUtil.getPropertiesByKey("properties/interface", getNameEN(interfaceName));
     }
 
 }

@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8"/>
@@ -25,7 +25,22 @@
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: auto" >
 <div class="ibox-content">
     <div class="row">
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span th:text=" '当前使用'+${interfaceType}+'的接口'"></span>
+        </div>
         <div class="row">
+            <div class="col-sm-5 form-group" style="display: none;">
+                <select class="form-control for-chosen" id="InterfaceType" name="InterfaceType" >
+                    <option value="">接口类型</option>
+                    <option value="胡强">胡强</option>
+                    <option value="鸿森">鸿森</option>
+                    <option value="城市站">城市站</option>
+                    <option value="22">22</option>
+                    <option value="验客宝">验客宝</option>
+                    <option value="正式站">正式站</option>
+                </select>
+            </div>
             <div class="col-sm-5 form-group">
                 <select class="form-control for-chosen" id="type" name="type">
                     <option value="">类型</option>
@@ -53,6 +68,9 @@
                     <button type="button" class="btn btn-info" onclick="submitPageForm();">搜索</button>
                 </span>
                 </div>
+            </div>
+            <div class="col-sm-5 form-group">
+
             </div>
         </div>
 
@@ -145,6 +163,9 @@
     var Url  = null;
     $(function () {
         initTable();
+        $("#InterfaceType").on("change", function () {
+            setInterface();
+        });
 
         function initTable(){
 
@@ -361,6 +382,17 @@
         }
     }
 
+    function setInterface(){
+        $.ajax({
+            url: "/base/setInterface",
+            type: "POST",
+            data: {"interfaceType":$('#InterfaceType').val()},
+            dataType: "JSON",
+            success: function (data) {
+                layer.msg("成功", {icon: 1});
+            }
+        });
+    }
 
 </script>
 </body>

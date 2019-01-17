@@ -19,8 +19,10 @@ import tk.mybatis.spring.annotation.MapperScan;
   *      ┃　┳┛　  ┗┳　┃
   *      ┃　　　　　　 ┃
   *      ┃　　　┻　　　┃
-  *      ┃　　　　　　 ┃
-  *      ┗━┓　　　┏━━━┛
+  *     ┗━┓　　　┏━━━┛
+  *        ┃　　　┃
+  *        ┃　　　┃
+  *        ┃　　　┃
   *        ┃　　　┃   神兽保佑
   *        ┃　　　┃   代码无BUG！
   *        ┃　　　┗━━━━━━━━━┓

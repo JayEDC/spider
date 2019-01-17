@@ -1,6 +1,7 @@
 package com.xfj.spider.controller;
 
 
+import com.xfj.spider.common.Constant;
 import com.xfj.spider.model.HouseQuestion;
 import com.xfj.spider.model.HouseQuestionStatus;
 import com.xfj.spider.service.HouseQuestionService;
@@ -37,7 +38,7 @@ public class HouseQuestionController {
     @Autowired
     HouseQuestionStatusServiceImpl houseQuestionStatusService;
 
-    private final static String UPLOADQUESTION = "http://192.168.10.181:9098/wxc/questionService/addQuestionSys";
+    private final static String UPLOADQUESTION = Constant.getInterfaceType();
 
     @RequestMapping("/getQuestionList")
     @ResponseBody

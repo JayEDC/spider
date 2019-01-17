@@ -1,11 +1,12 @@
 package com.xfj.spider.controller.base;
 
-import org.springframework.stereotype.Component;
+import com.xfj.spider.common.Constant;
+import com.xfj.spider.util.PropertiesFileUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ClassName baseInfoContorller
@@ -36,7 +37,8 @@ public class baseInfoContorller {
      * @return
      */
     @RequestMapping("/toGeQuestion")
-    public String toGeQuestion(){
+    public String toGeQuestion(ModelMap model){
+        model.put("interfaceType", Constant.getInterfaceName());
         return HOUSE_QUESTION;
     }
     @ResponseBody
@@ -45,7 +47,12 @@ public class baseInfoContorller {
         return "hello world";
     }
 
-
+    @RequestMapping("/setInterface")
+    @ResponseBody
+    public String setInterface(String interfaceType){
+        Constant.setInterface(interfaceType);
+        return "成功";
+    }
 
 
 }
