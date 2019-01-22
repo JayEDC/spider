@@ -39,7 +39,7 @@
             AND hq.hq_content LIKE CONCAT('%',#{hqContent},'%')
         </if>
         GROUP BY hq.hq_id
-        ORDER BY hs_status asc
+        order by hqs.hs_status asc
     </select>
 
     <select id="getCommentList" resultType="com.xfj.spider.model.vo.HouseQuestionVo" parameterType="map">

@@ -1,5 +1,4 @@
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -27,7 +26,7 @@
     <div class="row">
         <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <span th:text=" '当前使用'+${interfaceType}+'的接口'"></span>
+            <span th:text="${interfaceType}"></span>
         </div>
         <div class="row">
             <div class="col-sm-5 form-group" style="display: none;">
@@ -154,9 +153,12 @@
 <script src="/js/tinyImgUpload.js"></script>
 <script src="/js/plugins/layer/laydate/laydate.js"></script>
 <!-- Data Tables -->
-<script src="/js/plugins/dataTables/jquery.dataTables.js"></script>
+<!--<script src="/js/plugins/dataTables/jquery.dataTables.js"></script>-->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script src="/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-<script>
+<script type="text/javascript" >
     var table1 = $('#table1');
     var table2 = $('#table2');
     var tdInfo = null;
@@ -170,12 +172,15 @@
         function initTable(){
 
             table1.dataTable({
-                processing: true,
-                serverSide: true,
-                searching: false,
-                autoWidth: true,
-                bDestory : true,
-                bAutoWidth: false,
+
+                ordering:false,
+                orderMulti:false,
+                pageLength:10,
+                pagingType:"full_numbers",
+                processing:true,
+                searching:true,
+                serverSide:true,
+                order:[],
                 language: {url: '/js/plugins/dataTables/language/Chinese.json'},
                 ajax: {
                     url:"/houseQuestion/getQuestionList",
@@ -187,12 +192,6 @@
                     },
                     type: "get",
                 },
-                columnDefs: [
-                    {
-                        "defaultContent": "",
-                        "targets": "_all"
-                    }
-                ],
                 columns:[
                     {"name":"hqContent","data":function (row) {
                             return row.hqContent;

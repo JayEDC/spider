@@ -3,10 +3,10 @@ package com.xfj.spider.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.xfj.spider.mapper.HouseQuestionMapper;
 import com.xfj.spider.model.HouseQuestion;
-import com.xfj.spider.service.HouseQuestionService;
 import com.xfj.spider.model.vo.DataTable;
 import com.xfj.spider.model.vo.DataTableVo;
 import com.xfj.spider.model.vo.HouseQuestionVo;
+import com.xfj.spider.service.HouseQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

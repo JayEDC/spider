@@ -1,5 +1,8 @@
 package com.xfj.spider.model.vo;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ClassName DataTableVo
  * @Description //TODO
@@ -18,6 +21,9 @@ public class DataTableVo {
      */
     private int length;
 
+    private List<Map<String ,String>> order;
+
+
     public int getStart() {
         return start;
     }
@@ -32,5 +38,13 @@ public class DataTableVo {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public List<Map<String, String>> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Map<String, String>> order) {
+        this.order = order;
     }
 }

@@ -8,7 +8,6 @@ spring:
     servlet:
       content-type: text/html
     mode: HTML
-
   datasource:
       username: root
       password: 123456
@@ -38,6 +37,10 @@ spring:
       useGlobalDataSourceStat: true
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080
 
 #mybatis-plus:
 #  mapper-locations: classpath*:mapper/**Mapper.xml
