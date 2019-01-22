@@ -29,7 +29,7 @@
             <span th:text="${interfaceType}"></span>
         </div>
         <div class="row">
-            <div class="col-sm-5 form-group" style="display: none;">
+            <div class="col-sm-3 form-group" style="display: none;">
                 <select class="form-control for-chosen" id="InterfaceType" name="InterfaceType" >
                     <option value="">接口类型</option>
                     <option value="胡强">胡强</option>
@@ -40,7 +40,7 @@
                     <option value="正式站">正式站</option>
                 </select>
             </div>
-            <div class="col-sm-5 form-group">
+            <div class="col-sm-3 form-group">
                 <select class="form-control for-chosen" id="type" name="type">
                     <option value="">类型</option>
                     <option value="买房">买房</option>
@@ -50,7 +50,7 @@
                     <option value="政策">政策</option>
                 </select>
             </div>
-            <div class="col-sm-5 form-group">
+            <div class="col-sm-3 form-group">
                 <select class="form-control for-chosen" id="tag" name="tag">
                     <option value="">标签</option>
                     <option value="购房知识">购房知识</option>
@@ -60,7 +60,7 @@
                     <option value="资金">资金</option>
                 </select>
             </div>
-            <div class="col-sm-5 form-group">
+            <div class="col-sm-3 form-group">
                 <div class="input-group">
                     <input id="keyWord" type="text" class="form-control" name="keyWord" placeholder="标签/类型/问题">
                     <span class="input-group-btn">
@@ -307,9 +307,12 @@
     }
     //上传问答
     function putCmments(hqId,td,commentId) {
-        var questionContent =  $(td).parent().parent().parent().children().eq(0).html();
-        var answerContent = $(td).parent().parent().parent().children().eq(1).html();
-
+        $(td).attr("disabled",true);
+        //var questionContent =  $(td).parent().parent().parent().children().eq(0).html();
+        //var answerContent = $(td).parent().parent().parent().children().eq(1).html();
+        // 取td 第一个元素
+        var questionContent = $(td).parent().parent().parent().children().find("td").eq(0).text();
+        var answerContent = $(td).parent().parent().parent().children().find("td").eq(1).text();
         $.ajax({
             url: "/houseQuestion/uploadQuestion",
             type: "POST",
@@ -322,6 +325,7 @@
                     layer.msg(data.content, {icon: 1});
                     submitPageForm();
                 }
+                $(td).removeAttrs("disabled")
             }
         });
     }

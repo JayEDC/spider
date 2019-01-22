@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @Date 2019/1/1411:39 AM
  * @return 1.0
  **/
-@RequestMapping("/base")
+@RequestMapping(value = {"/base","","/"})
 @Controller
 public class baseInfoContorller {
 
@@ -26,7 +26,7 @@ public class baseInfoContorller {
      * 跳转到首页
      * @return
      */
-    @RequestMapping("/toIndex")
+    @RequestMapping(value = {"","/"})
     public String toIndex(){
         return INDEX;
     }

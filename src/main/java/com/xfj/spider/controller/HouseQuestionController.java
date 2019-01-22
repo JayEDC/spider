@@ -86,6 +86,8 @@ public class HouseQuestionController {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            result.setResultCode(ResultCode.FAIL);
+            result.setContent("接口异常！");
         }
 
         return result;
