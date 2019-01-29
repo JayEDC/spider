@@ -37,7 +37,7 @@ public class HkeaAgent implements PageProcessor {
         page.setSkip(!success);
     }
 
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(4000);
+    private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
 
     @Override
     public Site getSite() {
