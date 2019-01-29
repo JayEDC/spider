@@ -31,7 +31,10 @@ public class AgentServiceImpl extends BaseService<Agent> implements AgentService
         // 判断电话是否存在
         List<Telephone> listTelephones = telephoneAgentPlatformDao.getTelephones(telephone);
         if(listTelephones == null || listTelephones.size()==0){
-            telephoneAgentPlatformDao.insertTelephoneAgentPlatForm(telephone, agent, agentPlatform);
+            Integer res = telephoneAgentPlatformDao.insertTelephoneAgentPlatForm(telephone, agent, agentPlatform);
+            if(res >0){
+                System.out.println("添加经纪人成功！姓名："+agent.getAtName());
+            }
         } else {
             // 电话存在，判断经纪人是否存在
 
@@ -54,8 +57,6 @@ public class AgentServiceImpl extends BaseService<Agent> implements AgentService
                 AgentPlatform agentPlat = new AgentPlatform();
                 agentPlat.setAtId(atId);
                 agentPlat.setPmId(agentPlatform.getPmId());
-                agentPlat.setPmId(agentPlatform.getPmId());
-
                 List<AgentPlatform> listAgentPlatforms = telephoneAgentPlatformDao.getAgentPlatform(agentPlat);
                 if(listAgentPlatforms== null || listAgentPlatforms.size()==0){
                     agentPlatform.setAtId(atId);

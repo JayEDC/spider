@@ -79,6 +79,12 @@ public class Agent extends Model<Agent> {
     @TableField("at_house_count")
     private int atHouseCount;
 
+    /**
+     * 获取日期
+     */
+    @TableField("at_email")
+    private String atEmail;
+
     public Date getAtActiveDate() {
         return atActiveDate;
     }
@@ -175,6 +181,14 @@ public class Agent extends Model<Agent> {
         this.atCreateDate = atCreateDate;
     }
 
+    public String getAtEmail() {
+        return atEmail;
+    }
+
+    public void setAtEmail(String atEmail) {
+        this.atEmail = atEmail;
+    }
+
     @Override
     protected Serializable pkVal() {
         return this.atId;
@@ -183,16 +197,19 @@ public class Agent extends Model<Agent> {
     @Override
     public String toString() {
         return "Agent{" +
-        ", atId=" + atId +
-        ", teId=" + teId +
-        ", atCity=" + atCity +
-        ", atName=" + atName +
-        ", atSex=" + atSex +
-        ", atCompany=" + atCompany +
-        ", atPhoto=" + atPhoto +
-        ", atMainArea=" + atMainArea +
-        ", atMianLocation=" + atMainLocation +
-        ", atCreateDate=" + atCreateDate +
-        "}";
+                "atId=" + atId +
+                ", teId=" + teId +
+                ", atCity='" + atCity + '\'' +
+                ", atName='" + atName + '\'' +
+                ", atSex='" + atSex + '\'' +
+                ", atCompany='" + atCompany + '\'' +
+                ", atPhoto='" + atPhoto + '\'' +
+                ", atMainArea='" + atMainArea + '\'' +
+                ", atMainLocation='" + atMainLocation + '\'' +
+                ", atCreateDate=" + atCreateDate +
+                ", atActiveDate=" + atActiveDate +
+                ", atHouseCount=" + atHouseCount +
+                ", atEmail='" + atEmail + '\'' +
+                '}';
     }
 }

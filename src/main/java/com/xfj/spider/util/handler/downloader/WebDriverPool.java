@@ -154,11 +154,11 @@ class WebDriverPool {
 //			proxy.setSocksUsername("1459792453@qq.com");
 //			proxy.setSocksPassword("Qwertyuiop123");
 //			proxy.setHttpProxy(proxyIp.getIpAddr()+":"+proxyIp.getIpPort());
-			ChromeOptions chromeOptions = new ChromeOptions();
+			//ChromeOptions chromeOptions = new ChromeOptions();
 			//chromeOptions.addArguments("Proxy-Authorization:Basic MTQ1OTc5MjQ1M0BxcS5jb20lM0FRd2VydHl1aW9wMTIz");
-			chromeOptions.addArguments("--user-agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'");
+			//chromeOptions.addArguments("--user-agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36'");
 			//chromeOptions.addArguments("--Proxy-Authorization='Basic MTQ1OTc5MjQ1M0BxcS5jb20lM0FRd2VydHl1aW9wMTIz'");
-			chromeOptions.setHeadless(true);
+			//chromeOptions.setHeadless(true);
 			//为了获取console的日志输出
 			/*DesiredCapabilities caps = DesiredCapabilities.chrome();
 			LoggingPreferences logPrefs = new LoggingPreferences();
@@ -166,7 +166,7 @@ class WebDriverPool {
 			caps.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
 			caps.setCapability(ChromeOptions.CAPABILITY, chromeOptions);*/
 			//chromeOptions.setCapability("proxy",proxy);
-			mDriver  = new ChromeDriver(chromeOptions);
+			mDriver  = new ChromeDriver();
 			//logger.info("---------重置ip！当前 ip-------------" + proxyIp.getIpAddr());
 		} else if (driver.equals(DRIVER_PHANTOMJS)) {
 			mDriver = new PhantomJSDriver(sCaps);
