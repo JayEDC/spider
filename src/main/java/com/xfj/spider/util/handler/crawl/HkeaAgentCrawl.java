@@ -31,6 +31,7 @@ public class HkeaAgentCrawl extends AbstractCrawl {
             for (int i = 50;i >= 2;i--){
                 list.add("http://www.hkea.com.hk/pub/ListingServ?currPage="+i);
             }
+
             page.addTargetRequests(list);
         }
 

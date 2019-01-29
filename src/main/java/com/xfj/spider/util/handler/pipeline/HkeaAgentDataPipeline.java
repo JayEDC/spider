@@ -52,6 +52,7 @@ public class HkeaAgentDataPipeline implements Pipeline {
             agentPlatform.setAmUrl(resultItems.get("url").toString());
             agentService.createTelephoneAgentPlatform(telephone,agent,agentPlatform);
 
+
         }
 
 
