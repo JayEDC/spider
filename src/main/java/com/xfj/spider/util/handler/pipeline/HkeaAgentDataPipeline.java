@@ -41,18 +41,20 @@ public class HkeaAgentDataPipeline implements Pipeline {
             Agent agent = new Agent();
             agent.setAtActiveDate(new Date());
             agent.setAtCity("香港");
-            agent.setAtName(resultItems.get("name"));
+            agent.setAtName(resultItems.get("name").toString().trim());
             agent.setAtCreateDate(new Date());
-            agent.setAtEmail(resultItems.get("email"));
-
+            if(null != resultItems.get("email")){
+                agent.setAtEmail(resultItems.get("email").toString().trim());
+            }
+            if(null != resultItems.get("company")){
+                agent.setAtCompany(resultItems.get("company").toString().trim());
+            }
             AgentPlatform agentPlatform = new AgentPlatform();
             agentPlatform.setAmUpdateDate(new Date());
             agentPlatform.setPmId(4);
             agentPlatform.setAmCreateDate(new Date());
             agentPlatform.setAmUrl(resultItems.get("url").toString());
             agentService.createTelephoneAgentPlatform(telephone,agent,agentPlatform);
-
-
         }
 
 

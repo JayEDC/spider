@@ -1,8 +1,10 @@
 package com.xfj.spider.mapper;
 
 import com.xfj.spider.model.HouseQuestion;
+import com.xfj.spider.model.vo.CheckHouse;
 import com.xfj.spider.util.MyMapper;
 import com.xfj.spider.model.vo.HouseQuestionVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,6 @@ public interface HouseQuestionMapper extends MyMapper<HouseQuestion> {
 
     public List<HouseQuestionVo> getQuestionList(Map<String, Object> map);
 
-    public List<HouseQuestionVo> getCommentList(Map<String, Object> map);
+    public int countCheckHouseQuestionUrl(Map<String, Object> map);
 
 }

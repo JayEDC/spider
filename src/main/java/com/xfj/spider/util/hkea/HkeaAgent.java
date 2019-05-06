@@ -47,9 +47,10 @@ public class HkeaAgent implements PageProcessor {
 
     public void run(String url){
         Spider spider = Spider.create(new HkeaAgent());
+        spider.setDownloader(new SeleniumDownloader().setSleepTime(1000));
         spider.addPipeline(hkeaAgentDataPipeline);
         spider.addUrl(url);
-        spider.thread(5);
+        spider.thread(20);
         spider.run();
     }
 

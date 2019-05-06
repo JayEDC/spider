@@ -65,7 +65,9 @@ public class TelephoneAgentPlatformDao {
     }
 
     public List<Agent> getAgents(Agent agent){
-        return agentMapper.select(agent);
+        Map<String,Object> map = new HashMap<>();
+        map.put("name",agent.getAtName());
+        return agentMapper.getAgent(map);
     }
     public List<AgentPlatform> getAgentPlatform(AgentPlatform agentPlatform){
         return agentPlatformMapper.select(agentPlatform);

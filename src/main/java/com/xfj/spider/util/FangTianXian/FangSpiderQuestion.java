@@ -3,6 +3,7 @@ package com.xfj.spider.util.FangTianXian;
 import com.xfj.spider.util.handler.crawl.ChainCrawl;
 import com.xfj.spider.util.handler.crawl.Crawl;
 import com.xfj.spider.util.handler.downloader.SeleniumDownloader;
+import com.xfj.spider.util.handler.downloader.SpikeFileCacheQueueScheduler;
 import com.xfj.spider.util.handler.pipeline.FangCommentsPipeline;
 import com.xfj.spider.util.handler.pipeline.FangQuestionPipeline;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,11 @@ import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.monitor.SpiderMonitor;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.scheduler.FileCacheQueueScheduler;
+
+import javax.management.JMException;
 
 /**
  * @ClassName FangSpiderQuestion
@@ -39,20 +44,24 @@ public class FangSpiderQuestion implements PageProcessor {
         page.setSkip(!success);
     }
 
-    private Site site = Site.me().setRetryTimes(3).setSleepTime(100);
+    private Site site = Site.me().setRetryTimes(1).setSleepTime(100);
 
     @Override
     public Site getSite() {
         return site;
     }
 
-    public void run(String url){
+    public void run(String url) throws JMException {
+        FileCacheQueueScheduler fileCacheQueueScheduler = new FileCacheQueueScheduler("E:\\spider");
+
         Spider spider = Spider.create(this);
         spider.setDownloader(new SeleniumDownloader().setSleepTime(100));
+        spider.setScheduler(fileCacheQueueScheduler);
         spider.addUrl(url);
         spider.addPipeline(fangQuestionPipeline);
         spider.addPipeline(fangCommentsPipeline);
-        spider.thread(1);
+        spider.thread(10);
         spider.run();
+        SpiderMonitor.instance().register(spider);
     }
 }

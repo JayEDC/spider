@@ -28,10 +28,9 @@ public class HkeaAgentCrawl extends AbstractCrawl {
 
         if(this.checkUrlWithKey(page,"ListingServ") && !this.checkUrlWithKey(page,"pid") && !this.checkUrlWithKey(page,"currPage")){
             List<String> list = new ArrayList<>();
-            for (int i = 50;i >= 2;i--){
+            for (int i = 437;i >= 2;i--){
                 list.add("http://www.hkea.com.hk/pub/ListingServ?currPage="+i);
             }
-
             page.addTargetRequests(list);
         }
 
@@ -42,10 +41,19 @@ public class HkeaAgentCrawl extends AbstractCrawl {
                 page.putField("name",name[1]);
                 String[] phone = list.get(1).split("：");
                 page.putField("phone",phone[1]);
-                String email = html.css(".people p a","text").get();
+                String email = html.css(".people p a").links().get();
                 page.putField("email",email);
                 page.putField("type","1");
                 page.putField("url",page.getUrl());
+                String company = html.css(".company p:nth-child(2)","text").get();
+
+                if(null != company){
+                    String[] companys = company.split("：");
+                    if(companys.length>1){
+                        page.putField("company",companys[1]);
+                        System.out.println(companys[1]);
+                    }
+                }
                 return true;
             }
         }

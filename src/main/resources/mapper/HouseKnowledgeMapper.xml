@@ -25,4 +25,9 @@
         hs_id AS hsId, pm_id AS pmId, hs_type AS hsType, hs_title AS hsTitle, hs_sub_title AS hsSubTitle, hs_tag AS hsTag, hs_url AS hsUrl, hs_abstract AS hsAbstract, hs_time AS hsTime, hs_spider_time AS hsSpiderTime, hs_page_view AS hsPageView, hs_source AS hsSource, hs_html_part AS hsHtmlPart, hs_text_part AS hsTextPart
     </sql>
 
+    <select id="check" parameterType="string" resultType="com.xfj.spider.model.HouseKnowledge">
+        select hs_url from house_knowledge where hs_url =#{url}
+    </select>
+
+
 </mapper>

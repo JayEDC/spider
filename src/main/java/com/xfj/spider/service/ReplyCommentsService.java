@@ -8,5 +8,5 @@ import com.xfj.spider.model.ReplyComments;
  * @since 2019-01-11
  */
 public interface ReplyCommentsService extends IService<ReplyComments> {
-
+    public Boolean CommentsCheck(String url);
 }

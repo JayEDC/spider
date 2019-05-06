@@ -31,14 +31,14 @@ public class FangCommentsCrawl extends AbstractCrawl{
              * 获取问答分类
              */
             List<String> listQuestion = page.getHtml().css(".sec-menu").css(".pop-trade dd").links().all();
-            //page.addTargetRequests(listQuestion);
+            page.addTargetRequests(listQuestion);
             /**
              * 获取业主生活
              */
             List<String> listLife = page.getHtml().css(".sec-menu").css(".pop-life").links().all();
-            //page.addTargetRequests(listLife);
+            page.addTargetRequests(listLife);
 
-            if(this.checkUrlWithKey(page, ConstantFangTianXia.DEFAULT)){
+            if(this.checkUrlWithKey(page, ConstantFangTianXia.CLASS)){
                 /**
                  * 获取问题 url
                  */
@@ -49,7 +49,7 @@ public class FangCommentsCrawl extends AbstractCrawl{
                  */
                 page.addTargetRequests(page.getHtml().css(".pagebar-right").css("a").links().all());
             }
-            if(this.checkUrlWithKey(page, ConstantFangTianXia.ASKINFO)){
+            if(page.getHtml().css(".breadcrum").all().toString().contains("问题详情")){
                 page.addTargetRequests(page.getHtml().css(".pagebar-right").links().all());
                 /**
                  * 获取问题类型
@@ -73,12 +73,20 @@ public class FangCommentsCrawl extends AbstractCrawl{
                  * 获取发布时间
                  */
                 List<String> timeList = page.getHtml().css(".question-from").css("span","text").all();
-                String time = timeList.get(2);
+                String time = "";
+                if(timeList.size()>0){
+                    time = timeList.get(2);
+                }
                 page.putField("time",time);
                 /**
                  * 获取浏览次数
                  */
                 String view = page.getHtml().css(".question-from").css("em","text").get();
+
+                if(view == null){
+
+                }
+
                 page.putField("view",view);
 
                 /**
@@ -152,8 +160,6 @@ public class FangCommentsCrawl extends AbstractCrawl{
                 page.putField("commentMap",commentMap);
                 page.putField(ConstantFangTianXia.COMMENTS,ConstantFangTianXia.COMMENTS);
                 page.putField(ConstantFangTianXia.QUESTIONPIPEKEY,ConstantFangTianXia.QUESTIONPIPEKEY);
-
-
 
                 return true;
             }

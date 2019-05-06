@@ -5,9 +5,6 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.io.Serializable;
 
 /**
@@ -21,7 +18,6 @@ public class ReplyComments extends Model<ReplyComments> {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "comments_id", type = IdType.AUTO)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentsId;
     /**
      * 评论用户头像
@@ -44,8 +40,8 @@ public class ReplyComments extends Model<ReplyComments> {
     @TableField("comments_content")
     private String commentsContent;
     private Integer parent;
-    @TableField("hq_id")
-    private Integer hqId;
+    @TableField("hq_url")
+    private String hqUrl;
 
 
     public Integer getCommentsId() {
@@ -96,12 +92,12 @@ public class ReplyComments extends Model<ReplyComments> {
         this.parent = parent;
     }
 
-    public Integer getHqId() {
-        return hqId;
+    public String getHqUrl() {
+        return hqUrl;
     }
 
-    public void setHqId(Integer hqId) {
-        this.hqId = hqId;
+    public void setHqUrl(String hqUrl) {
+        this.hqUrl = hqUrl;
     }
 
     @Override
@@ -118,7 +114,7 @@ public class ReplyComments extends Model<ReplyComments> {
         ", commentsTime=" + commentsTime +
         ", commentsContent=" + commentsContent +
         ", parent=" + parent +
-        ", hqId=" + hqId +
+        ", hqUrl=" + hqUrl +
         "}";
     }
 }

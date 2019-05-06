@@ -21,7 +21,7 @@ import java.util.Properties;
  * @Date 2019/1/148:31 PM
  * @return 1.0
  **/
-@Configuration
+//@Configuration
 public class MybatisConf {
     @Bean
     @Primary

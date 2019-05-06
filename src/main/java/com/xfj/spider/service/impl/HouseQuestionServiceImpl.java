@@ -1,12 +1,14 @@
 package com.xfj.spider.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.xfj.spider.mapper.HouseQuestionMapper;
 import com.xfj.spider.model.HouseQuestion;
+import com.xfj.spider.mapper.HouseQuestionMapper;
+import com.xfj.spider.model.vo.CheckHouse;
+import com.xfj.spider.service.HouseQuestionService;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.xfj.spider.model.vo.DataTable;
 import com.xfj.spider.model.vo.DataTableVo;
 import com.xfj.spider.model.vo.HouseQuestionVo;
-import com.xfj.spider.service.HouseQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,12 +37,9 @@ public class HouseQuestionServiceImpl extends BaseService<HouseQuestion> impleme
     }
 
     @Override
-    public String getCommentList(DataTableVo dataTableVo, Map<String, Object> map) {
-        int pageNum = dataTableVo.getStart()/dataTableVo.getLength()+1;
-        int pageSize = dataTableVo.getLength();
-        PageHelper.startPage(pageNum,pageSize);
-        List<HouseQuestionVo> list  = houseQuestionMapper.getCommentList(map);
-        return DataTable.getInstance(list).toString();
+    public int checkHouseQuestionUrl(Map<String, Object> map) {
+        //houseQuestionMapper.getQuestionList(map);
+        return houseQuestionMapper.countCheckHouseQuestionUrl(map);
     }
 
 

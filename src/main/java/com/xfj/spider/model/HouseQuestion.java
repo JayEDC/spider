@@ -80,6 +80,12 @@ public class HouseQuestion extends Model<HouseQuestion> {
     @TableField("hq_tag")
     private String hqTag;
 
+    /**
+     * 问答城市
+     */
+    @TableField("hq_city")
+    private String hqCity;
+
 
     public Integer getHqId() {
         return hqId;
@@ -175,6 +181,14 @@ public class HouseQuestion extends Model<HouseQuestion> {
 
     public void setHqTag(String hqTag) {
         this.hqTag = hqTag;
+    }
+
+    public String getHqCity() {
+        return hqCity;
+    }
+
+    public void setHqCity(String hqCity) {
+        this.hqCity = hqCity;
     }
 
     @Override

@@ -4,8 +4,10 @@ import java.util.Date;
 import com.xfj.spider.model.HouseKnowledge;
 import com.xfj.spider.service.HouseKnowledgeService;
 import com.xfj.spider.util.handler.base.ConstantFangTianXia;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
@@ -17,6 +19,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
  * @Date 2019/1/72:55 PM
  * @return 1.0
  **/
+@Component
 public class FangZhiShiPipeline implements Pipeline {
 
     private Logger logger = Logger.getLogger(getClass());
@@ -48,13 +51,15 @@ public class FangZhiShiPipeline implements Pipeline {
             houseKnowledge.setHsHtmlPart(resultItems.get("text"));
             houseKnowledge.setHsTextPart(resultItems.get("htmlText"));
 
-            int i = houseKnowledgeService.save(houseKnowledge);
-            if (i>0){
-                logger.info("---------添加文章成功！文章标题：" + houseKnowledge.getHsTitle());
+            boolean check = houseKnowledgeService.check(resultItems.get("url").toString().trim());
+            if(check){
+                int i = houseKnowledgeService.save(houseKnowledge);
+                if (i>0){
+                    logger.info("---------添加文章成功！文章标题：" + houseKnowledge.getHsTitle());
+                }
             }
-
         }
-
-
     }
+
+
 }

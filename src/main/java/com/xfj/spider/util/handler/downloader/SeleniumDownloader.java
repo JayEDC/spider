@@ -146,14 +146,16 @@ public class SeleniumDownloader implements Downloader, Closeable {
 			 * 如果经纪人存在房源则进行点击，获取最后一页，计算总数
 			 */
 			if(html.xpath("/html/body/div[2]/div[2]/div[2]/div[1]/span").get()!= null){
-				int count = html.css(".paging-list li").all().size();
-				webElement = webDriver.findElement(By.xpath("//*[@id=\"gent-list\"]/div[1]/div/ul/li["+count+"]"));
-				if (null != webElement){
-					webElement.click();
-					try {
-						Thread.sleep(sleepTime);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				if(html.css(".paging-list li").all().size() != 0){
+					int count  = html.css(".paging-list li").all().size();
+					webElement = webDriver.findElement(By.xpath("//*[@id=\"gent-list\"]/div[1]/div/ul/li["+count+"]"));
+					if (null != webElement){
+						webElement.click();
+						try {
+							Thread.sleep(sleepTime);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -162,18 +164,21 @@ public class SeleniumDownloader implements Downloader, Closeable {
 			 * 登录
 			 */
 			if(html.css("#sfHeadUsername").all().size() > 0){
-				webElement = webDriver.findElement(By.cssSelector("#sfHeadUsername"));
-				if (null != webElement){
-					webElement.click();
-					try {
-						Thread.sleep(sleepTime);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				String val = html.css("#sfHeadUsername","text").get().trim();
+				if(val.equals("登录")){
+					webElement = webDriver.findElement(By.cssSelector("#sfHeadUsername"));
+					if (null != webElement){
+						webElement.click();
+						try {
+							Thread.sleep(sleepTime);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
+					webElement = webDriver.findElement(By.xpath("/html"));
+					content = webElement.getAttribute("outerHTML");
+					html = new Html(content, request.getUrl());
 				}
-				webElement = webDriver.findElement(By.xpath("/html"));
-				content = webElement.getAttribute("outerHTML");
-				html = new Html(content, request.getUrl());
 			}
 
 			/**
@@ -196,7 +201,7 @@ public class SeleniumDownloader implements Downloader, Closeable {
 			}
 
 			if(html.css(".img_out_focus").all().size() > 0){
-				webElement = webDriver.findElement(By.cssSelector("#img_out_1459792453"));
+				webElement = webDriver.findElement(By.cssSelector("#img_out_973523198"));
 				if (null != webElement){
 					webElement.click();
 					try {

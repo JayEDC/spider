@@ -3,7 +3,6 @@
 <mapper namespace="com.xfj.spider.mapper.HouseQuestionMapper">
 
     <!-- 通用查询映射结果 -->
-
     <resultMap id="BaseResultMap" type="com.xfj.spider.model.HouseQuestion">
         <id column="hq_id" property="hqId" />
         <result column="pm_id" property="pmId" />
@@ -19,32 +18,27 @@
         <result column="hq_tag" property="hqTag" />
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        hq_id AS hqId, pm_id AS pmId, hq_type AS hqType, hq_content AS hqContent, hq_question_count AS hqQuestionCount, hq_publish_time AS hqPublishTime, hq_spider_time AS hqSpiderTime, hq_page_view AS hqPageView, hq_question_user AS hqQuestionUser, hq_question_user_photo AS hqQuestionUserPhoto, hq_url AS hqUrl, hq_tag AS hqTag
-    </sql>
+
 
     <select id="getQuestionList" resultType="com.xfj.spider.model.vo.HouseQuestionVo" parameterType="map">
-        SELECT hq.hq_id,rc.comments_id,hq.hq_content,rc.comments_content,hq.hq_type,hq.hq_tag,hq.hq_publish_time,hqs.hs_status,hq.hq_url FROM house_question hq
+        SELECT hq.hq_content,rc.comments_content,hq.hq_type,hq.hq_tag,hq.hq_publish_time,hqs.hs_status FROM house_question hq
         LEFT JOIN house_question_status hqs on hq.hq_id = hqs.hq_id
         LEFT JOIN reply_comments rc on hq.hq_url =rc.hq_url
         WHERE 1=1
-        <if test="hqType!=null">
+        <if test="hqType !=null">
             AND hq.hq_type LIKE CONCAT('%',#{hqType},'%')
         </if>
-        <if test="hqTag!=null">
+        <if test="hqTag !=null">
             AND hq.hq_tag LIKE CONCAT('%',#{hqTag},'%')
         </if>
-        <if test="hqContent !=null">
+        <if test="hqContent != null">
             AND hq.hq_content LIKE CONCAT('%',#{hqContent},'%')
         </if>
         GROUP BY hq.hq_id
-        order by hqs.hs_status asc
     </select>
-
-    <select id="getCommentList" resultType="com.xfj.spider.model.vo.HouseQuestionVo" parameterType="map">
-        SELECT comments_user_name,comments_content,comments_id FROM reply_comments
-        WHERE 1=1
+    <select id="countCheckHouseQuestionUrl" resultType="int" parameterType="map">
+        SELECT COUNT(hq_url) FROM house_question
+        where 1=1
         <if test="hqUrl != null">
             AND hq_url = #{hqUrl}
         </if>

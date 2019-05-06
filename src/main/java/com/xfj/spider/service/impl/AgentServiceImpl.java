@@ -28,6 +28,11 @@ public class AgentServiceImpl extends BaseService<Agent> implements AgentService
 
     @Override
     public void createTelephoneAgentPlatform(Telephone telephone, Agent agent, AgentPlatform agentPlatform){
+        List<Agent> agents = telephoneAgentPlatformDao.getAgents(agent);
+        if(agents.size()!=0){
+            System.out.println("经纪人已存在！姓名："+agent.getAtName());
+            return;
+        }
         // 判断电话是否存在
         List<Telephone> listTelephones = telephoneAgentPlatformDao.getTelephones(telephone);
         if(listTelephones == null || listTelephones.size()==0){

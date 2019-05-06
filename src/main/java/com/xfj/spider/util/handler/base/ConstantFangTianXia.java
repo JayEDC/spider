@@ -28,11 +28,11 @@ public class ConstantFangTianXia {
     /**
      * 问答详情
      */
-    public static final String ASKINFO = "ask_";
+    public static final String ASKINFO = "ask_html";
     /**
      * 问答分类
      */
-    public static final String DEFAULT = "default_";
+    public static final String CLASS = "class";
     /**
      * 问答采集
      */

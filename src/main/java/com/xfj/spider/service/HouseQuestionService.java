@@ -1,6 +1,7 @@
 package com.xfj.spider.service;
 
 import com.xfj.spider.model.HouseQuestion;
+import com.xfj.spider.model.vo.CheckHouse;
 import com.xfj.spider.model.vo.DataTableVo;
 import com.xfj.spider.model.vo.HouseQuestionVo;
 
@@ -17,5 +18,5 @@ public interface HouseQuestionService extends IService<HouseQuestion> {
 
     public String getQuestionList(DataTableVo dataTableVo,Map<String, Object> map);
 
-    public String getCommentList(DataTableVo dataTableVo,Map<String, Object> map);
+    public int checkHouseQuestionUrl(Map<String, Object> map);
 }

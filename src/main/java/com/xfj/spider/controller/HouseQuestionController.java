@@ -55,7 +55,8 @@ public class HouseQuestionController {
     public String getCommentList(DataTableVo dataTableVo,String hqUrl){
         Map<String, Object> map = new HashMap<>();
         map.put("hqUrl",hqUrl);
-        return houseQuestionService.getCommentList(dataTableVo,map);
+        //houseQuestionService.getCommentList(dataTableVo,map)
+        return null;
     }
 
     @RequestMapping("/uploadQuestion")
